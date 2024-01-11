@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.config.StaffMapper">
+    <select id="staffFind" resultType="StaffDTO" parameterType="int"> select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq from T_STAFF where staff_seq=#{staff_seq} </select>
+    <select id="staffFindAll" resultType="StaffDTO"> select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq from T_STAFF </select>
+    <update id="staffUpdate" parameterType="StaffDTO"> update T_STAFF set staff_id=#{staff_id}, staff_pw=#{staff_pw}, staff_name=#{staff_name}, staff_role=#{staff_role}, staff_image=#{staff_image} , staff_phone=#{staff_phone}, staff_intro=#{staff_intro}, staff_nickname=#{staff_nickname}, shop_seq=#{shop_seq} where staff_seq=#{staff_seq} </update>
+    <insert id="staffAdd" parameterType="StaffDTO"> INSERT INTO T_STAFF (staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq) VALUES (#{staff_id},#{staff_pw},#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq}) </insert>
+    <delete id="staffDelete" parameterType="int"> DELETE FROM T_STAFF WHERE staff_seq = #{staff_seq} </delete>
+</mapper>
