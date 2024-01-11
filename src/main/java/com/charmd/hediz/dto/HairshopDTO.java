@@ -1,22 +1,26 @@
 package com.charmd.hediz.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 import java.sql.Time;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Alias("HairshopDTO")
 public class HairshopDTO {
-    int shop_seq;
-    String shop_name;
-    String shop_register;
-    String shop_code;
-    String shop_address;
-    String shop_phone;
-    String shop_intro;
-    String shop_image;
-    Time shop_start;
-    Time shop_end;
-    int shop_off;
+    private int shop_seq;
+    private String shop_name;
+    private String shop_register;
+    private String shop_code;
+    private String shop_address;
+    private String shop_phone;
+    private String shop_intro;
+    private String shop_image;
+    private Time shop_start;
+    private Time shop_end;
+    private int shop_off;
 }

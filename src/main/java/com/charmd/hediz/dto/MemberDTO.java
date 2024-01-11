@@ -5,19 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Alias("StaffDTO")
-public class StaffDTO {
+@Alias("MemberDTO")
+public class MemberDTO {
+
     private int staff_seq;
     private String staff_id;
     private String staff_pw;
     private String staff_name;
-    private int staff_role;
+    private String staff_role;
     private String staff_image;
     private String staff_phone;
     private String staff_intro;
     private String staff_nickname;
-    private int shop_seq;
+    private String shop_seq;
+
+
 }
