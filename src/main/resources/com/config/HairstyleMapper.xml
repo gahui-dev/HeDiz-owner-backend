@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.config.HairstyleMapper">
+    <select id="hairstyleFind" resultType="HairstyleDTO" parameterType="int"> select style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq from T_HAIRSTYLE where style_seq=#{style_seq} </select>
+    <select id="hairstyleFindAll" resultType="HairstyleDTO"> select style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq from T_HAIRSTYLE </select>
+    <update id="hairstyleUpdate" parameterType="HairstyleDTO"> update T_HAIRSTYLE set style_name=#{style_name}, style_gender=#{style_gender}, style_time=#{style_time}, style_price=#{style_price}, style_intro=#{style_intro}, style_image=#{style_image}, shop_seq=#{shop_seq} where style_seq = #{style_seq} </update>
+    <insert id="hairstyleAdd" parameterType="HairstyleDTO"> INSERT INTO T_HAIRSTYLE (style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq) VALUES (#{style_name},#{style_gender},#{style_time},#{style_price},#{style_intro},#{style_image},#{shop_seq}) </insert>
+    <delete id="hairstyleDelete" parameterType="int"> DELETE FROM T_HAIRSTYLE WHERE style_seq = #{style_seq} </delete>
+</mapper>

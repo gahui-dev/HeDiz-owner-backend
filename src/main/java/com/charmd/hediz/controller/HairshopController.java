@@ -1,7 +1,9 @@
 package com.charmd.hediz.controller;
 
 import com.charmd.hediz.dto.HairshopDTO;
+import com.charmd.hediz.dto.HairstyleDTO;
 import com.charmd.hediz.service.HairshopService;
+import com.charmd.hediz.service.HairstyleService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,12 @@ public class HairshopController {
     @Autowired
     private HairshopService hairshopService;
 
+    @Autowired
+    private HairstyleService hairstyleService;
+
+    /*
+    * 미용실 정보 (/info)
+    * */
     // 모든 미용실 정보 조회
     @GetMapping("info")
     public List<HairshopDTO> allHairshopSelect() {
@@ -48,4 +56,44 @@ public class HairshopController {
         int n = hairshopService.hairshopDelete(shopSeq);
         return "미용실 삭제 완료";
     }
+
+    /*
+     * 헤어스타일 (/hairstyle)
+     * */
+    // 모든 헤어스타일 정보 조회
+    @GetMapping("hairstyle")
+    public List<HairstyleDTO> allHairstyleSelect() {
+        List<HairstyleDTO> hairList;
+        hairList = hairstyleService.hairstyleFindAll();
+        return hairList;
+    }
+
+    // 특정 헤어스타일 정보 조회
+    @GetMapping("hairstyle/{style_seq}")
+    public HairstyleDTO hairstyleSelect(@PathVariable("style_seq") int styleSeq) {
+        HairstyleDTO hairstyleDto = hairstyleService.hairstyleFind(styleSeq);
+        return hairstyleDto;
+    }
+
+    // 헤어스타일 데이터 추가
+    @PostMapping("hairstyle")
+    public String hairstyleInsert(@RequestBody HairstyleDTO postData) {
+        int n = hairstyleService.hairstyleAdd(postData);
+        return "헤어스타일 추가 완료";
+    }
+
+    // 헤어스타일 데이터 수정
+    @PutMapping("hairstyle")
+    public String hairstyleUpdate(@RequestBody HairstyleDTO putData) {
+        int n = hairstyleService.hairstyleUpdate(putData);
+        return "헤어스타일 수정 완료";
+    }
+
+    // 헤어스타일 데이터 삭제
+    @DeleteMapping("hairstyle/{style_seq}")
+    public String hairstyleDelete(@PathVariable("style_seq") int styleSeq) {
+        int n = hairstyleService.hairstyleDelete(styleSeq);
+        return "헤어스타일 삭제 완료";
+    }
+
 }
