@@ -88,7 +88,7 @@ public class ReservationController {
     @DeleteMapping("review/{review_seq}")
     public String reviewDelete(@PathVariable("review_seq") int reviewSeq){
         int n = reviewService.reviewDelete(reviewSeq);
-        return "리뷰 삭제 완료";
+        return "리뷰 권동혁 삭제 완료";
     }
 
     /*
