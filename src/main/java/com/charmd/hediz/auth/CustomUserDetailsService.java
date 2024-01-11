@@ -6,19 +6,11 @@ import java.util.List;
 import com.charmd.hediz.dto.MemberDTO;
 import com.charmd.hediz.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-/*
- *  Spring Security 에서 중요한 역활을 하는 서비스 만들기
- *
- *  - UserDetailsService 인터페이스를 구현해서 만든다
- */
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService{

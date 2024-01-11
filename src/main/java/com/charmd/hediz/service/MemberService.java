@@ -23,7 +23,7 @@ public class MemberService {
         String samplePwd= new BCryptPasswordEncoder().encode("1234");
 
         MemberDTO dto = new MemberDTO();
-        dto.setStaff_id("aaa");
+        dto.setStaff_id("a");
         dto.setStaff_pw(samplePwd);
         dto.setStaff_name("양명진");
         dto.setStaff_role("1");
@@ -33,8 +33,6 @@ public class MemberService {
         dto.setStaff_nickname("이주");
         dto.setShop_seq("1");
 
-
-        userMapper.insertUser(dto);
     }
 
     public MemberDTO auth(MemberDTO dto) {
