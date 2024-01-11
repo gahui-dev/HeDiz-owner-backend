@@ -22,6 +22,6 @@ public class HomeController {
 
     @GetMapping("mypage")
     public String mypage(){
-        return "마이페이지";
+        return "박찬웅 마이페이지";
     }
 }
