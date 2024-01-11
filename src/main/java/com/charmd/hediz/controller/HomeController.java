@@ -12,7 +12,7 @@ public class HomeController {
 
     @GetMapping("dashboard")
     public String dashboard(){
-        return "git test";
+        return "가희 테스트";
     }
 
     @GetMapping("realtime-reservation")
