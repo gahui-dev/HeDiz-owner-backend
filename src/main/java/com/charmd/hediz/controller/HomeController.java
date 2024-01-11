@@ -17,11 +17,11 @@ public class HomeController {
 
     @GetMapping("realtime-reservation")
     public String realtimeReservation(){
-        return "실시간 예약 페이지";
+        return "페이지";
     }
 
     @GetMapping("mypage")
     public String mypage(){
-        return "마이페이지";
+        return "박찬웅 마이페이지";
     }
 }
