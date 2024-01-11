@@ -1,10 +1,13 @@
 package com.charmd.hediz.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 @Data
-@Alias("StaffDTO")
+@AllArgsConstructor
+@NoArgsConstructor
 public class StaffDTO {
     int staff_seq;
     String staff_id;
