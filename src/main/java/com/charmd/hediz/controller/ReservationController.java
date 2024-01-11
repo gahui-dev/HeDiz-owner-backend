@@ -56,7 +56,7 @@ public class ReservationController {
     /*
      * 리뷰 관리 (/review)
      * */
-    // 전체 리뷰 확인
+    // 전체 리뷰 조회
     @GetMapping("review")
     public List<ReviewDTO> reviewFindAll(){
         List<ReviewDTO> reviewList;
@@ -64,7 +64,7 @@ public class ReservationController {
         return reviewList;
     }
 
-    // 특정 리뷰 확인
+    // 특정 리뷰 조회
     @GetMapping("review/{review_seq}")
     public ReviewDTO reviewFind(@PathVariable("review_seq") int reviewSeq){
         ReviewDTO reviewDto = reviewService.reviewFind(reviewSeq);

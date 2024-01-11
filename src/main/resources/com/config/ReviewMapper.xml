@@ -4,8 +4,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.config.ReservationMapper">
-    <select id="reviewFindAll" resultType="ReviewDTO"> select review_seq, shop_seq, reserv_seq, review_score, review_content, review_photo, review_date, review_reply from T_REVIEW </select>
-    <select id="reviewFind" resultType="ReviewDTO" parameterType="int"> select review_seq, shop_seq, reserv_seq, review_score, review_content, review_photo, review_date, review_reply from T_REVIEW where review_seq=#{review_seq} </select>
-    <update id="reviewUpdate" parameterType="hashmap"> update T_REVIEW set review_reply=#{review_reply} where review_seq=#{review_seq} </update>
-    <delete id="reviewDelete" parameterType="int"> delete from T_REVIEW where review_seq=#{review_seq} </delete>
+    <!--전체 리뷰 조회-->
+    <select id="reviewFindAll" resultType="ReviewDTO">
+        select review_seq, shop_seq, reserv_seq, review_score, review_content, review_photo, review_date, review_reply from T_REVIEW
+    </select>
+
+    <!--특정 리뷰 조회-->
+    <select id="reviewFind" resultType="ReviewDTO" parameterType="int">
+        select review_seq, shop_seq, reserv_seq, review_score, review_content, review_photo, review_date, review_reply from T_REVIEW where review_seq=#{review_seq}
+    </select>
+
+    <!--특정 리뷰 답글달기-->
+    <update id="reviewUpdate" parameterType="hashmap">
+        update T_REVIEW set review_reply=#{review_reply} where review_seq=#{review_seq}
+    </update>
+
+    <!--// 특정 리뷰 삭제-->
+    <delete id="reviewDelete" parameterType="int">
+        delete from T_REVIEW where review_seq=#{review_seq}
+    </delete>
 </mapper>
