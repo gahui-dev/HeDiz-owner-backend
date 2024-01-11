@@ -140,4 +140,9 @@ public class HairshopController {
         int n = staffService.staffDelete(staffSeq);
         return "직원 삭제 완료";
     }
+
+    /*
+     * 임시 휴무일 (/closed-day)
+     * */
+
 }
