@@ -4,8 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.config.ReservationMapper">
-    <!--  id는 메서드 이름과 동일하게 쓴다.  -->
     <select id="reservationFindAll" resultType="ReservationDTO"> select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat from T_RESERVATION </select>
     <select id="reservationFind" parameterType="int" resultType="ReservationDTO"> select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat from T_RESERVATION where reserv_seq=#{reservSeq} </select>
     <update id="reservationUpdate" parameterType="hashmap"> update T_RESERVATION set reserv_stat=#{reserv_stat} where reserv_seq=#{reserv_seq} </update>
-    </mapper>
+</mapper>
