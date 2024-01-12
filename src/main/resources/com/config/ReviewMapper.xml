@@ -6,7 +6,19 @@
 <mapper namespace="com.config.ReservationMapper">
     <!--전체 리뷰 조회-->
     <select id="reviewFindAll" resultType="ReviewDTO">
-        select review_seq, shop_seq, reserv_seq, review_score, review_content, review_photo, review_date, review_reply from T_REVIEW
+        SELECT
+        tr.review_seq,
+        th.shop_name,
+        re.reserv_name,
+        tr.review_score,
+        tr.review_content,
+        tr.review_photo,
+        tr.review_date,
+        tr.review_reply
+        FROM
+        t_review tr
+        LEFT JOIN t_hairshop th ON tr.shop_seq = th.shop_seq
+        LEFT JOIN t_reservation re ON tr.reserv_seq = re.reserv_seq;
     </select>
 
     <!--특정 리뷰 조회-->
