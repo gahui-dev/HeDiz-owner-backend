@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 public class HairstyleDTO {
     int style_seq;
     int shop_seq;
-    int cate_seq;
+    String cate_name;
     String style_name;
     String style_gender;
     int style_time;

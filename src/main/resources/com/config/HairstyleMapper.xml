@@ -5,24 +5,33 @@
 
 <mapper namespace="com.config.HairstyleMapper">
 
-    <!--특정 헤어스타일 조회-->
+    <!--카테고리 클릭 시 헤어스타일 조회-->
     <select id="hairstyleFind" resultType="HairstyleDTO" parameterType="int">
-        select style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq from T_HAIRSTYLE where style_seq=#{style_seq}
+        SELECT style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, cate_name
+        FROM T_HAIRSTYLE a
+        INNER JOIN T_CATEGORY b ON a.cate_seq = b.cate_seq
+        WHERE b.cate_name = #{cate.name}
     </select>
 
     <!--모든 헤어스타일 조회-->
     <select id="hairstyleFindAll" resultType="HairstyleDTO">
-        select style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq from T_HAIRSTYLE
+        SELECT style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, cate_name
+        FROM T_HAIRSTYLE a
+        INNER JOIN T_CATEGORY b ON a.cate_seq = b.cate_seq
     </select>
 
     <!--헤어스타일 데이터 추가-->
     <insert id="hairstyleAdd" parameterType="HairstyleDTO">
-        INSERT INTO T_HAIRSTYLE (style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq) VALUES (#{style_name},#{style_gender},#{style_time},#{style_price},#{style_intro},#{style_image},#{shop_seq})
+        INSERT INTO T_HAIRSTYLE (style_name, style_gender, style_time, style_price, style_intro, style_image, shop_seq, cate_seq)
+            VALUES (#{style_name},#{style_gender},#{style_time},#{style_price},#{style_intro},#{style_image},#{shop_seq}, #{cate_seq})
     </insert>
 
     <!--헤어스타일 데이터 수정-->
     <update id="hairstyleUpdate" parameterType="HairstyleDTO">
-        update T_HAIRSTYLE set style_name=#{style_name}, style_gender=#{style_gender}, style_time=#{style_time}, style_price=#{style_price}, style_intro=#{style_intro}, style_image=#{style_image}, shop_seq=#{shop_seq} where style_seq = #{style_seq}
+        UPDATE T_HAIRSTYLE a INNER JOIN T_CATEGORY b ON a.cate_seq = b.cate_seq
+        SET style_name=#{style_name}, style_gender=#{style_gender}, style_time=#{style_time}, style_price=#{style_price},
+            style_intro=#{style_intro}, style_image=#{style_image}, cate_name = #{cate_name}
+        WHERE style_seq = #{style_seq}
     </update>
 
     <!--헤어스타일 데이터 삭제-->
