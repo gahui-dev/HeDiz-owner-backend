@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -34,7 +35,8 @@ public class StaffDAO {
     }
 
     // shop_code를 이용해서 shop_name, shop_seq 얻어오기
-    public HairshopDTO findShopSeqAndShopNameUsingShopCode(String shopCode){
-        return session.selectOne("com.config.StaffMapper.findShopSeqAndShopNameUsingShopCode", shopCode);
+    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode){
+        HashMap<String, Object> shopSeqAndShopNameMap = session.selectOne("com.config.StaffMapper.findShopSeqAndShopNameUsingShopCode", shopCode);
+        return shopSeqAndShopNameMap;
     }
 }

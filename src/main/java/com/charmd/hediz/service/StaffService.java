@@ -3,6 +3,7 @@ package com.charmd.hediz.service;
 import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface StaffService {
@@ -18,5 +19,5 @@ public interface StaffService {
     // 회원가입
     public void signUp(StaffDTO staffDto);
 
-    public HairshopDTO findShopSeqAndShopNameUsingShopCode(String shopCode);
+    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode);
 }

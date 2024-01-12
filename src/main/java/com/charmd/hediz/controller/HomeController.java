@@ -21,8 +21,11 @@ public class HomeController {
         return "권동혁 예약 페이지";
     }
 
+    // mypage Get 요청하면 StaffDTO 데이터 조회되야 한다.
     @GetMapping("mypage")
     public String mypage(){
         return "박찬웅 마이페이지";
     }
+
+
 }
