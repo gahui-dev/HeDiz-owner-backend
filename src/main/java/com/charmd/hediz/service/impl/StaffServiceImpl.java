@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
 
 @Service("staffService")
@@ -71,7 +72,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public HairshopDTO findShopSeqAndShopNameUsingShopCode(String shopCode) {
+    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode) {
         return dao.findShopSeqAndShopNameUsingShopCode(shopCode);
     }
 }

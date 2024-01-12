@@ -49,7 +49,7 @@
     </insert>
 
     <!--고유코드를 이용해 shop_seq, shop_name 찾기-->
-    <select id="findShopSeqAndShopNameUsingShopCode" parameterType="string" resultType="HairshopDTO">
+    <select id="findShopSeqAndShopNameUsingShopCode" parameterType="string" resultType="hashmap">
         SELECT shop_seq, shop_name
         FROM T_HAIRSHOP
         WHERE shop_code = #{shopCode}
