@@ -1,5 +1,6 @@
 package com.charmd.hediz.dao;
 
+import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,15 @@ public class StaffDAO {
     public int staffAdd(StaffDTO postData) {return session.insert("com.config.StaffMapper.staffAdd", postData);}
     public int staffDelete(int staff_seq){return session.delete("com.config.StaffMapper.staffDelete", staff_seq);}
 
+    public StaffDTO getUserById(String staffId){
+        return session.selectOne("com.config.StaffMapper.getUserById", staffId);
+    }
+    public void signUp(StaffDTO staffDto){
+        session.insert("com.config.StaffMapper.signUp", staffDto);
+    }
+
+    // shop_code를 이용해서 shop_name, shop_seq 얻어오기
+    public HairshopDTO findShopSeqAndShopNameUsingShopCode(String shopCode){
+        return session.selectOne("com.config.StaffMapper.findShopSeqAndShopNameUsingShopCode", shopCode);
+    }
 }

@@ -1,7 +1,7 @@
 package com.charmd.hediz.service.impl;
 
 import com.charmd.hediz.dao.StaffDAO;
-import com.charmd.hediz.dto.MemberDTO;
+import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 import com.charmd.hediz.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +21,18 @@ public class StaffServiceImpl implements StaffService {
     @PostConstruct
     public void initUsers(){
         String samplePwd= new BCryptPasswordEncoder().encode("1234");
-        MemberDTO dto = new MemberDTO();
-        dto.setStaff_id("bbb");
-        dto.setStaff_pw(samplePwd);
-        dto.setStaff_name("양명진");
-        dto.setStaff_role("1");
-        dto.setStaff_image("img2");
-        dto.setStaff_phone("010-7593-6191");
-        dto.setStaff_intro("로그인테스트");
-        dto.setStaff_nickname("이주");
-        dto.setShop_seq("1");
+        StaffDTO staffDto = new StaffDTO();
+        staffDto.setStaff_id("cc");
+        staffDto.setStaff_pw(samplePwd);
+        staffDto.setStaff_name("이가희어제술먹음");
+        staffDto.setStaff_role(1);
+        staffDto.setStaff_image("img2");
+        staffDto.setStaff_phone("010-7593-6191");
+        staffDto.setStaff_intro("로그인테스트");
+        staffDto.setStaff_nickname("이주");
+        staffDto.setShop_seq(1);
+
+//        dao.signUp(staffDto);
     }
     @Override
     public StaffDTO staffFind(int staff_seq) {
@@ -55,5 +57,21 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public int staffDelete(int staff_seq) {
         return dao.staffDelete(staff_seq);
+    }
+
+    @Override
+    public StaffDTO getUserById(String staffId) {
+        return dao.getUserById(staffId);
+    }
+
+//    @Override
+    public void signUp(StaffDTO staffDto) {
+        // 암호화 부분 필요
+        dao.signUp(staffDto);
+    }
+
+    @Override
+    public HairshopDTO findShopSeqAndShopNameUsingShopCode(String shopCode) {
+        return dao.findShopSeqAndShopNameUsingShopCode(shopCode);
     }
 }

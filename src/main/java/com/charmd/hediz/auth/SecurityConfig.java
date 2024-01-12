@@ -1,6 +1,5 @@
 package com.charmd.hediz.auth;
 
-
 import com.charmd.hediz.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,6 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
-    //jwt 를 쿠키로 저장할때 쿠키의 이름
     @Value("${jwt.name}")
     private String jwtName;
 
@@ -32,15 +30,11 @@ public class SecurityConfig {
                                            CookieRequestCache cookCache
     ) throws Exception {
         System.out.println("SecurityConfig.filterChain");
-        // 권한에 따라 허용하는 url 설정
         // /login, /signup 페이지는 모두 허용, 다른 페이지는 인증된 사용자만 허용
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/login", "/signup").permitAll();
-//                .antMatchers("/update/**").hasRole("ADMIN") // 수정은 ROLE_ADMIN 만 가능
-//                .anyRequest().authenticated();
-
+                .antMatchers( "/sign-in").permitAll();
 
         //세션을 사용하지 않도록 설정한다.
         http
@@ -49,7 +43,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 //세션을 사용할수 없기때문에 쿠키케시를 사용하도록 설정한다.
                 .requestCache(config->config.requestCache(cookCache));
-
         return http.build();
     }
 
@@ -74,9 +67,6 @@ public class SecurityConfig {
     //쿠키 케시를 bean 으로 만든다.
     @Bean
     public CookieRequestCache getCookieRequestCache() {
-        System.out.println("SecurityConfig.getCookieRequestCache>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
         return new CookieRequestCache();
     }
-
-
 }

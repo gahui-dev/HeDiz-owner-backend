@@ -14,8 +14,8 @@ import java.util.Date;
 @Alias("ReviewDTO")
 public class ReviewDTO {
     private int review_seq;
-    private int shop_seq;
-    private int reserv_seq;
+    private String shop_name;
+    private String reserv_name;
     private BigDecimal review_score;
     private String review_content;
     private String review_photo;

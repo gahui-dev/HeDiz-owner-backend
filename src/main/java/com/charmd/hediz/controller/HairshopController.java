@@ -119,13 +119,6 @@ public class HairshopController {
         StaffDTO staffDto = staffService.staffFind(staffSeq);
         return staffDto;
     }
-
-    // 직원 데이터 추가
-    @PostMapping("staff")
-    public String staffInsert(@RequestBody StaffDTO postData) {
-        int n = staffService.staffAdd(postData);
-        return "직원 추가 완료";
-    }
     
     // 직원 데이터 수정
     @PutMapping("staff")
