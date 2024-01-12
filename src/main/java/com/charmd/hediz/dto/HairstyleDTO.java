@@ -13,7 +13,7 @@ public class HairstyleDTO {
 
     private int style_seq;
     private int shop_seq;
-    private int cate_seq;
+    private String cate_seq;
     private String style_name;
     private String style_gender;
     private int style_time;
