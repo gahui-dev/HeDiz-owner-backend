@@ -63,13 +63,13 @@ public class AuthController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<StaffDTO> signUp(@RequestBody StaffDTO staffDto) { // 회원 가입
-        System.out.println("AuthController.signup: " + staffDto);
+    public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) { // 회원 가입
+        System.out.println("AuthController.signup: " + hairshopDto);
 
         // 입력된 dto 그대로 반환되기 때문에 따로 변수에 저장은 없음
-        staffService.signUp(staffDto);
+        staffService.signUp(hairshopDto);
 
-        return ResponseEntity.ok(staffDto);
+        return ResponseEntity.ok(hairshopDto);
     }
 
 

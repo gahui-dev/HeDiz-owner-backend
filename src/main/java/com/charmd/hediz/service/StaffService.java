@@ -17,7 +17,7 @@ public interface StaffService {
     public StaffDTO getUserById(String staffId);
 
     // 회원가입
-    public void signUp(StaffDTO staffDto);
+    public void signUp(HairshopDTO hairshopDto);
 
     public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode);
 }

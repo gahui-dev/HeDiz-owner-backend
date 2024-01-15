@@ -30,8 +30,8 @@ public class StaffDAO {
     public StaffDTO getUserById(String staffId){
         return session.selectOne("com.config.StaffMapper.getUserById", staffId);
     }
-    public void signUp(StaffDTO staffDto){
-        session.insert("com.config.StaffMapper.signUp", staffDto);
+    public void signUp(HairshopDTO hairshopDto){
+        session.insert("com.config.StaffMapper.signUp", hairshopDto);
     }
 
     // shop_code를 이용해서 shop_name, shop_seq 얻어오기

@@ -66,9 +66,9 @@ public class StaffServiceImpl implements StaffService {
     }
 
 //    @Override
-    public void signUp(StaffDTO staffDto) {
+    public void signUp(HairshopDTO hairshopDto) {
         // 암호화 부분 필요
-        dao.signUp(staffDto);
+        dao.signUp(hairshopDto);
     }
 
     @Override
