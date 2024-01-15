@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         StaffDTO staffDto = staffService.getUserById(staffId);
         if (staffDto != null) {
             List<SimpleGrantedAuthority> list = new ArrayList<>();
-            String staffRole = Integer.toString(staffDto.getStaff_role());
+            String staffRole = staffDto.getStaff_role();
             list.add(new SimpleGrantedAuthority(staffRole));
             UserDetails userDetails = new org.springframework.security.core.userdetails
                     .User(staffDto.getStaff_id(), staffDto.getStaff_pw(), list);

@@ -7,7 +7,8 @@
     <!--특정 직원 조회-->
     <select id="staffFind" resultType="StaffDTO" parameterType="int">
         select staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq
-        from T_STAFF where staff_seq=#{staff_seq}
+        from T_STAFF
+        where staff_seq=#{staff_seq}
     </select>
 
     <!--모든 직원 조회-->

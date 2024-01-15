@@ -6,7 +6,13 @@
 <mapper namespace="com.config.ReservationMapper">
     <!--전체 예약 데이터 조회-->
     <select id="reservationFindAll" resultType="ReservationDTO">
-        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat from T_RESERVATION
+        SELECT reserv_seq, a.style_seq, a.cust_seq, staff_seq, a.shop_seq, cust_name, cust_phone, reserv_request, reserv_time, reserv_stat, style_name
+            FROM T_RESERVATION a
+            INNER JOIN T_CUSTOMER b
+                ON a.cust_seq = b.cust_seq
+            INNER JOIN T_HAIRSTYLE c
+                ON c.style_seq = a.style_seq
+            WHERE a.shop_seq = #{a.shop_seq};
     </select>
 
     <!--특정 예약 데이터 조회-->

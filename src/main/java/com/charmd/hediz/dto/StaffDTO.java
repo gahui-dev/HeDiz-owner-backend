@@ -14,7 +14,7 @@ public class StaffDTO {
     private String staff_id;
     private String staff_pw;
     private String staff_name;
-    private int staff_role;
+    private String staff_role;
     private String staff_image;
     private String staff_phone;
     private String staff_intro;
