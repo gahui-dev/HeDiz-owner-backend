@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.CustomerMapper">
+
+    <!--고객 데이터 조회-->
+    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">
+        select cust_seq, cust_name, cust_id, cust_phone, cust_gender
+        from T_CUSTOMER
+        where cust_seq in (
+        select cust_seq
+        from T_RESERVATION
+        where shop_seq = (
+        select shop_seq
+        from T_HAIRSHOP
+        where shop_name = #{shop_name}
+        )
+        )
+    </select>
+</mapper>
