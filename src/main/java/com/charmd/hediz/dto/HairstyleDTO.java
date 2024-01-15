@@ -16,8 +16,9 @@ public class HairstyleDTO {
     private String cate_seq;
     private String style_name;
     private String style_gender;
-    private int style_time;
-    private int style_price;
+    private String style_time;
+    private String style_price;
     private String style_intro;
     private String style_image;
+    private String cate_name;
 }

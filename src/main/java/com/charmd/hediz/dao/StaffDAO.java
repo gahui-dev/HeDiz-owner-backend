@@ -34,7 +34,7 @@ public class StaffDAO {
         session.insert("com.config.StaffMapper.signUp", hairshopDto);
     }
 
-    // shop_code를 이용해서 shop_name, shop_seq 얻어오기
+    //  를 이용해서 shop_name, shop_seq 얻어오기
     public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode){
         HashMap<String, Object> shopSeqAndShopNameMap = session.selectOne("com.config.StaffMapper.findShopSeqAndShopNameUsingShopCode", shopCode);
         return shopSeqAndShopNameMap;
