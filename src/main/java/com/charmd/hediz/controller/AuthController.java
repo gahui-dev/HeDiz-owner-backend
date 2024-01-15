@@ -73,14 +73,14 @@ public class AuthController {
     }
 
 
-    // shop_code를 이용해서 shop_name, shop_seq 얻어오기
-    @GetMapping("/sign-up/{shop_code}")
-    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(@PathVariable("shop_code") String shopCode){
-        HashMap<String, Object> shopSeqAndShopNameMap = new HashMap<>();
-        shopSeqAndShopNameMap = staffService.findShopSeqAndShopNameUsingShopCode(shopCode);
-        System.out.println(shopSeqAndShopNameMap);
-        return shopSeqAndShopNameMap;
-    }
+//    //  를 이용해서 shop_name, shop_seq 얻어오기
+//    @GetMapping("/sign-up/{ }")
+//    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(@PathVariable(" ") String shopCode){
+//        HashMap<String, Object> shopSeqAndShopNameMap = new HashMap<>();
+//        shopSeqAndShopNameMap = staffService.findShopSeqAndShopNameUsingShopCode(shopCode);
+//        System.out.println(shopSeqAndShopNameMap);
+//        return shopSeqAndShopNameMap;
+//    }
 
 
 }
