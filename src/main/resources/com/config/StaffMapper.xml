@@ -6,28 +6,28 @@
 <mapper namespace="com.config.StaffMapper">
     <!--특정 직원 조회-->
     <select id="staffFind" resultType="StaffDTO" parameterType="int">
-        select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro,
+        select staff_seq,staff_name, staff_role, staff_image, staff_phone, staff_intro,
         staff_nickname, shop_seq from T_STAFF where staff_seq=#{staff_seq}
     </select>
 
     <!--모든 직원 조회-->
     <select id="staffFindAll" resultType="StaffDTO">
-        select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro,
+        select staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro,
         staff_nickname, shop_seq from T_STAFF
     </select>
 
     <!--직원 데이터 수정-->
     <update id="staffUpdate" parameterType="StaffDTO">
-        update T_STAFF set staff_id=#{staff_id}, staff_pw=#{staff_pw}, staff_name=#{staff_name},
+        update T_STAFF set, staff_name=#{staff_name},
         staff_role=#{staff_role}, staff_image=#{staff_image} , staff_phone=#{staff_phone}, staff_intro=#{staff_intro},
         staff_nickname=#{staff_nickname}, shop_seq=#{shop_seq} where staff_seq=#{staff_seq}
     </update>
 
     <!--직원 데이터 추가-->
     <insert id="staffAdd" parameterType="StaffDTO">
-        INSERT INTO T_STAFF (staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro,
+        INSERT INTO T_STAFF (staff_name, staff_role, staff_image, staff_phone, staff_intro,
         staff_nickname, shop_seq) VALUES
-        (#{staff_id},#{staff_pw},#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq})
+        (#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq})
     </insert>
 
     <!--직원 데이터 삭제-->
@@ -35,22 +35,23 @@
         DELETE FROM T_STAFF WHERE staff_seq = #{staff_seq}
     </delete>
 
-    <!--id를 이용해 직원 찾기-->
-    <select id="getUserById" parameterType="String" resultType="StaffDTO">
-        SELECT staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro,
-        staff_nickname, shop_seq FROM T_STAFF WHERE staff_id=#{staff_id}
-    </select>
+<!--    &lt;!&ndash;id를 이용해 직원 찾기&ndash;&gt;-->
+<!--    <select id="getUserById" parameterType="String" resultType="StaffDTO">-->
+<!--        SELECT staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro,-->
+<!--        staff_nickname, shop_seq FROM T_STAFF WHERE staff_id=#{staff_id}-->
+<!--    </select>-->
 
-    <!--회원가입-->
-    <insert id="signUp" parameterType="HairshopDTO">
-        INSERT INTO T_HAIRSHOP (shop_name, shop_register, shop_id, shop_pw, shop_address, shop_intro, shop_image, shop_start, shop_end, shop_phone, shop_off, shop_tag)
-        VALUES (#{shop_name}, #{shop_register}, #{shop_id}, #{shop_pw}, #{shop_address}, #{shop_intro}, #{shop_image}, #{shop_start}, #{shop_end}, #{shop_phone}, #{shop_off}, #{shop_tag})
+
+    <insert id="signUp" parameterType="StaffDTO">
+        INSERT INTO T_STAFF ( staff_name, staff_role, staff_image, staff_phone, staff_intro,
+        staff_nickname, shop_seq) VALUES
+        (#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq})
     </insert>
 
-    <!--고유코드를 이용해 shop_seq, shop_name 찾기-->
-    <select id="findShopSeqAndShopNameUsingShopCode" parameterType="string" resultType="hashmap">
-        SELECT shop_seq, shop_name
-        FROM T_HAIRSHOP
-        WHERE shop_code = #{shopCode}
-    </select>
+<!--    &lt;!&ndash;고유코드를 이용해 shop_seq, shop_name 찾기&ndash;&gt;-->
+<!--    <select id="findShopSeqAndShopNameUsingShopCode" parameterType="string" resultType="hashmap">-->
+<!--        SELECT shop_seq, shop_name-->
+<!--        FROM T_HAIRSHOP-->
+<!--        WHERE   = #{shopCode}-->
+<!--    </select>-->
 </mapper>

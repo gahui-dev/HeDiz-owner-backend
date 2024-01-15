@@ -88,7 +88,7 @@ public class HairshopController {
     }
 
     // 헤어스타일 데이터 수정
-    @PutMapping("hairstyle")
+    @PutMapping("hairstyle/{style_seq}")
     public String hairstyleUpdate(@RequestBody HairstyleDTO putData) {
         int n = hairstyleService.hairstyleUpdate(putData);
         return "헤어스타일 수정 완료";
@@ -119,13 +119,20 @@ public class HairshopController {
         StaffDTO staffDto = staffService.staffFind(staffSeq);
         return staffDto;
     }
-    
+    // 헤어스타일 데이터 추가
+    @PostMapping("staff")
+    public String staffInsert(@RequestBody StaffDTO postData) {
+        int n = staffService.staffAdd(postData);
+        return "직원 추가 완료";
+    }
+
     // 직원 데이터 수정
-    @PutMapping("staff")
+    @PutMapping("staff/{staff_seq}")
     public String staffUpdate(@RequestBody StaffDTO putData) {
         int n = staffService.staffUpdate(putData);
         return "직원 수정 완료";
     }
+
 
     // 직원 데이터 삭제
     @DeleteMapping("staff/{staff_seq}")

@@ -15,10 +15,10 @@ import java.util.Date;
 public class ReviewDTO {
     private int review_seq;
     private String shop_name;
-    private String reserv_name;
     private BigDecimal review_score;
     private String review_content;
     private String review_photo;
     private Date review_date;
     private String review_reply;
+    private String cust_name;
 }

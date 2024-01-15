@@ -6,14 +6,14 @@
 
     <!--특정 미용실 조회-->
     <select id="hairshopFind" resultType="HairshopDTO" parameterType="int">
-        select shop_seq, shop_name, shop_register, shop_code, shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off
+        select shop_seq, shop_name, shop_register,  shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off
         from T_HAIRSHOP
         where shop_seq=#{shop_seq}
     </select>
 
     <!--모든 미용실 조회-->
     <select id="hairshopFindAll" resultType="HairshopDTO">
-        select shop_seq, shop_name, shop_register, shop_code, shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off
+        select shop_seq, shop_name, shop_register, shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off
         from T_HAIRSHOP
     </select>
 
@@ -32,12 +32,18 @@
 
     <!--미용실 데이터 추가-->
     <insert id="hairshopAdd" parameterType="HairshopDTO">
-        INSERT INTO T_HAIRSHOP (shop_name, shop_register, shop_code, shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off)
-        VALUES (#{shop_name},#{shop_register},#{shop_code},#{shop_address},#{shop_phone},#{shop_intro},#{shop_image},#{shop_start},#{shop_end}, shop_off)
+        INSERT INTO T_HAIRSHOP (shop_name, shop_register, shop_address, shop_phone, shop_intro, shop_image, shop_start, shop_end, shop_off)
+        VALUES (#{shop_name},#{shop_register},#{shop_address},#{shop_phone},#{shop_intro},#{shop_image},#{shop_start},#{shop_end}, shop_off)
     </insert>
 
     <!--미용실 데이터 삭제-->
     <delete id="hairshopDelete" parameterType="int">
         DELETE FROM T_HAIRSHOP WHERE shop_seq = #{hairshopSeq}
     </delete>
+
+    <!--회원가입-->
+    <insert id="signUp" parameterType="HairshopDTO">
+    INSERT INTO T_HAIRSHOP (shop_name, shop_register, shop_id, shop_pw, shop_address, shop_intro, shop_image, shop_start, shop_end, shop_phone, shop_off, shop_tag)
+    VALUES (#{shop_name}, #{shop_register}, #{shop_id}, #{shop_pw}, #{shop_address}, #{shop_intro}, #{shop_image}, #{shop_start}, #{shop_end}, #{shop_phone}, #{shop_off}, #{shop_tag})
+
 </mapper>
