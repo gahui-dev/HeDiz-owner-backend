@@ -2,6 +2,7 @@ package com.charmd.hediz.service.impl;
 
 import com.charmd.hediz.dao.HairshopDAO;
 import com.charmd.hediz.dto.HairshopDTO;
+import com.charmd.hediz.dto.TempdayDTO;
 import com.charmd.hediz.service.HairshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,10 @@ public class HairshopServiceImpl implements HairshopService{
     @Override
     public int hairshopDelete(int shop_seq) {
         return dao.hairshopDelete(shop_seq);
+    }
+
+    @Override
+    public List<TempdayDTO> tempdayFind(int shop_seq) {
+        return dao.tempdayFind(shop_seq);
     }
 }

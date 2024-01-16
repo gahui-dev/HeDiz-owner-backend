@@ -3,6 +3,7 @@ package com.charmd.hediz.controller;
 import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.HairstyleDTO;
 import com.charmd.hediz.dto.StaffDTO;
+import com.charmd.hediz.dto.TempdayDTO;
 import com.charmd.hediz.service.HairshopService;
 import com.charmd.hediz.service.HairstyleService;
 import com.charmd.hediz.service.StaffService;
@@ -144,5 +145,14 @@ public class HairshopController {
     /*
      * 임시 휴무일 (/closed-day)
      * */
-
+    @GetMapping("closed-day/{shop_seq}")
+    public List<TempdayDTO> tempdaySelect(@PathVariable("shop_seq") int shopSeq) {
+        List<TempdayDTO> tempdayDto = hairshopService.tempdayFind(shopSeq);
+        return tempdayDto;
+    }
+//    @PostMapping("closed-day")
+//    public String tempdayInsert(@RequestBody StaffDTO postData) {
+//        int n = hairshopService.staffAdd(postData);
+//        return "휴무일 추가 완료";
+//    }
 }
