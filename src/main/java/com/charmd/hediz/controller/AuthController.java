@@ -62,32 +62,61 @@ public class AuthController {
 //        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt), httpHeaders, HttpStatus.OK);
 //
 //    }
-    @PostMapping("/sign-in")
-    public ResponseEntity<TokenDTO> signIn(@RequestBody HairshopDTO hairshopDto) {
 
-        System.out.println("AuthController.login:>>>> " + hairshopDto);
+//    @PostMapping("/sign-in")
+//    public ResponseEntity<TokenDTO> signIn(@RequestBody HairshopDTO hairshopDto) {
+//        //사용자 인증정보 저장
+//        UsernamePasswordAuthenticationToken authenticationToken =
+//                new UsernamePasswordAuthenticationToken(hairshopDto.getShop_id(), hairshopDto.getShop_pw());
+//        //성공적으로 인증된 사용자를 현재 스레드의 보안 컨텍스트에 설정, 스프링 시큐리티가 인식 가능
+//        System.out.println("디버그 3");
+//
+//        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        System.out.println("디버그1");
+//        // hairshop의 id를 받아와서 토큰 생성해주기
+//        String jwt = jwtUtil.generateToken(hairshopDto.getShop_id());
+//        System.out.println("디버그2");
+//        System.out.println("AuthController.jwt: >>>" + jwt);
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.add(tokenKey, "Bearer+" + jwt);
+//
+//        System.out.println("AuthController.jwt: >>>" + jwt);
+//        System.out.println(httpHeaders);
+//        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt), httpHeaders, HttpStatus.OK);
+//    }
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<TokenDTO> signIn(@RequestBody HashMap<String, String> signInMap) {
+        // id 값
+        String id = signInMap.get("shop_id");
+        String pw = signInMap.get("shop_pw");
+
+        System.out.println("id : " + id + " pw : " + pw);
+
         //사용자 인증정보 저장
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(hairshopDto.getShop_id(), hairshopDto.getShop_pw());
-
-        System.out.println(authenticationToken);
+                new UsernamePasswordAuthenticationToken(id, pw);
         //성공적으로 인증된 사용자를 현재 스레드의 보안 컨텍스트에 설정, 스프링 시큐리티가 인식 가능
-        System.out.println("디버그 3");
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("디버그1");
-        // staff의 id를 받아와서 토큰 생성해주기
-        String jwt = jwtUtil.generateToken(hairshopDto.getShop_id());
-        System.out.println("디버그2");
+        // hairshop의 id를 받아와서 토큰 생성해주기
+
+
+        // 여기에 shop_seq도 넣어서 token을 생성해야 한다.
+        // shop_seq 불러오는 메서드 작성
+        int shopSeq =  authService.getUserById(id).getShop_seq();
+        System.out.println("shop_seq 값 : " + shopSeq);
+
+        String jwt = jwtUtil.createToken(id, shopSeq);
         System.out.println("AuthController.jwt: >>>" + jwt);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(tokenKey, "Bearer+" + jwt);
 
         System.out.println("AuthController.jwt: >>>" + jwt);
         System.out.println(httpHeaders);
-        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt), httpHeaders, HttpStatus.OK);
-
+        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt, shopSeq), httpHeaders, HttpStatus.OK);
     }
 
 

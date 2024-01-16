@@ -50,24 +50,42 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
     //토큰을 만들어서 리턴해주는 메소드
-    public String generateToken(String username) {
-        Map<String, Object> claims = new HashMap<>();
-        //테스트로 추가 정보도 담아보기
-//        claims.put("email", "naver@");
-        claims.put("addr", "서울시 강남구");
-        return createToken(claims, username);
-    }
-
-    private String createToken(Map<String, Object> claims, String subject) {
+//    public String generateToken(String id, int shopSeq) {
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("shop_seq", shopSeq);
+//
+//        // shop_seq token에 추가해서 진행
+////        claims.put("shop_seq", sho)
+//        return createToken(claims, username);
+//    }
+    public String createToken(String id, int shopSeq) {
         //JwtBuilder 객체를 이용해서 토큰을 만든다.
+
+        // id, shopSeq 해시맵에 저장
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("shop_seq", shopSeq);
+        claims.put("id", id);
 
         return Jwts.builder()
                 .setClaims(claims)  //토큰에 담을 추가 정보
-                .setSubject(subject) //토큰의 주제(사용자명 or 사용자의 id or 기관명 or 기기명)
+                .setSubject(id) //토큰의 주제(사용자명 or 사용자의 id or 기관명 or 기기명)
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발급 시간
                 .setExpiration(new Date(System.currentTimeMillis() + expiration)) //토큰 무효화 되는 시간
                 .signWith(SignatureAlgorithm.HS256, secret).compact(); // HS256 알고리즘으로 서명해서 토큰얻어내기
     }
+
+//    private String createToken(Map<String, Object> claims, String subject) {
+//        //JwtBuilder 객체를 이용해서 토큰을 만든다.
+//
+//        return Jwts.builder()
+//                .setClaims(claims)  //토큰에 담을 추가 정보
+//                .setSubject(subject) //토큰의 주제(사용자명 or 사용자의 id or 기관명 or 기기명)
+//                .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발급 시간
+//                .setExpiration(new Date(System.currentTimeMillis() + expiration)) //토큰 무효화 되는 시간
+//                .signWith(SignatureAlgorithm.HS256, secret).compact(); // HS256 알고리즘으로 서명해서 토큰얻어내기
+//    }
+
+
     //토큰 유효성 여부를 리턴하는 메소드
     public Boolean validateToken(String token, UserDetails userDetails) {
         //토큰으로 부터 userName 를 얻어내서
