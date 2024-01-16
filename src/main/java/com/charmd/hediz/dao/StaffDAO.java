@@ -27,9 +27,9 @@ public class StaffDAO {
     public int staffAdd(StaffDTO postData) {return session.insert("com.config.StaffMapper.staffAdd", postData);}
     public int staffDelete(int staff_seq){return session.delete("com.config.StaffMapper.staffDelete", staff_seq);}
 
-    public StaffDTO getUserById(String staffId){
-        return session.selectOne("com.config.StaffMapper.getUserById", staffId);
-    }
+//    public StaffDTO getUserById(String staffId){
+//        return session.selectOne("com.config.StaffMapper.getUserById", staffId);
+//    }
 
     //  를 이용해서 shop_name, shop_seq 얻어오기
     public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode){

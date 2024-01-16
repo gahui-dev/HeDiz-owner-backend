@@ -17,4 +17,8 @@ public class AuthDAO {
     public int duplicateCheck(String shopId){
         return session.selectOne("com.config.AuthMapper.duplicateCheck", shopId);
     }
+
+    public HairshopDTO getUserById(String shopId){
+        return session.selectOne("com.config.AuthMapper.getUserById", shopId);
+    }
 }

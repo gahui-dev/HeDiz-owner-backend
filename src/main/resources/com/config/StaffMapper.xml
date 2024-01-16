@@ -36,9 +36,9 @@
         DELETE FROM T_STAFF WHERE staff_seq = #{staff_seq}
     </delete>
 
-    <!--id를 이용해 직원 찾기-->
-    <select id="getUserById" parameterType="String" resultType="StaffDTO">
-        SELECT staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro,
-        staff_nickname, shop_seq FROM T_STAFF WHERE staff_id=#{staff_id}
-    </select>
+<!--    &lt;!&ndash;id를 이용해 직원 찾기&ndash;&gt;-->
+<!--    <select id="getUserById" parameterType="String" resultType="StaffDTO">-->
+<!--        SELECT staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro,-->
+<!--        staff_nickname, shop_seq FROM T_STAFF WHERE staff_id=#{staff_id}-->
+<!--    </select>-->
 </mapper>

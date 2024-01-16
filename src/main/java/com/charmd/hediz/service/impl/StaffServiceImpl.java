@@ -57,10 +57,10 @@ public class StaffServiceImpl implements StaffService {
         return dao.staffDelete(staff_seq);
     }
 
-    @Override
-    public StaffDTO getUserById(String staffId) {
-        return dao.getUserById(staffId);
-    }
+//    @Override
+//    public StaffDTO getUserById(String staffId) {
+//        return dao.getUserById(staffId);
+//    }
 
 
     @Override

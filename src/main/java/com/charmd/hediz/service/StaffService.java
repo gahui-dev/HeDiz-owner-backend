@@ -14,7 +14,7 @@ public interface StaffService {
     public int staffDelete(int staff_seq);
 
     // getUserById
-    public StaffDTO getUserById(String staffId);
+//    public StaffDTO getUserById(String staffId);
 
 
     public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode);
