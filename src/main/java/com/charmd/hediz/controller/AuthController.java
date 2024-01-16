@@ -68,6 +68,9 @@ public class AuthController {
     @PostMapping("/duplicate-check")
     public boolean duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
         String shopId = shopIdMap.get("shop_id");
+        if (shopId == null || shopId.trim().isEmpty()) {
+            return false;
+        }
         int n = authService.duplicateCheck(shopId);
         System.out.println("id 개수 : " + n);
         return n == 0;
