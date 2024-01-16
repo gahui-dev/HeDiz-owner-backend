@@ -14,11 +14,12 @@ import java.util.Date;
 public class ReservationDTO {
     private int reserv_seq;
     private int style_seq;
+    private String style_name;
     private int cust_seq;
+    private String cust_name;
     private int staff_seq;
+    private String staff_nickname;
     private int shop_seq;
-    private String reserv_name;
-    private String reserv_phone;
     private String reserv_request;
     private Date reserv_time;
     private int reserv_stat;

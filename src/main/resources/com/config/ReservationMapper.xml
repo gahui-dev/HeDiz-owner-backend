@@ -6,7 +6,11 @@
 <mapper namespace="com.config.ReservationMapper">
     <!--전체 예약 데이터 조회-->
     <select id="reservationFindAll" resultType="ReservationDTO">
-        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat from T_RESERVATION
+        select reserv_seq, hs.style_name, cu.cust_name, re.shop_seq, reserv_request, reserv_time, reserv_stat , st.staff_nickname
+        from T_RESERVATION re
+        LEFT JOIN t_hairstyle hs ON re.style_seq = hs.style_seq
+        LEFT JOIN t_customer cu ON re.cust_seq = cu.cust_seq
+        LEFT JOIN t_Staff st ON re.staff_seq = st.staff_seq
     </select>
 
     <!--특정 예약 데이터 조회-->
