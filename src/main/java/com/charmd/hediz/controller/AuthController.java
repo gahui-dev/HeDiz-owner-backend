@@ -61,6 +61,16 @@ public class AuthController {
 
     }
 
+
+    // id 중복확인
+    @PostMapping("/duplicate-check")
+    public void duplicateCheck(@RequestBody HairshopDTO hairshopDto){
+        System.out.println(hairshopDto);
+//        authService.duplicateCheck(hairshopDto);
+
+    }
+
+    // 회원가입
     @PostMapping("/sign-up")
     public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) { // 회원 가입
         // 입력된 dto 그대로 반환되기 때문에 따로 변수에 저장은 없음

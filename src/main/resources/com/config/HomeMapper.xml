@@ -5,15 +5,15 @@
 <mapper namespace="com.config.HomeMapper">
 
     <!--전체 예약 조회-->
-    <select id="" parameterType="hashmap">
-        SELECT reserv_seq, a.style_seq, a.cust_seq, staff_seq, a.shop_seq, cust_name, cust_phone, reserv_request, reserv_time, reserv_stat
-            FROM T_RESERVATION a
-            INNER JOIN T_CUSTOMER b
-                ON a.cust_seq = b.cust_seq
-            INNER JOIN T_HAIRSTYLE c
-                ON c.style_seq = a.style_seq
-        WHERE a.shop_seq = #{a.shop_seq};
-    </select>
+<!--    <select id="" parameterType="hashmap">-->
+<!--        SELECT reserv_seq, a.style_seq, a.cust_seq, staff_seq, a.shop_seq, cust_name, cust_phone, reserv_request, reserv_time, reserv_stat-->
+<!--            FROM T_RESERVATION a-->
+<!--            INNER JOIN T_CUSTOMER b-->
+<!--                ON a.cust_seq = b.cust_seq-->
+<!--            INNER JOIN T_HAIRSTYLE c-->
+<!--                ON c.style_seq = a.style_seq-->
+<!--        WHERE a.shop_seq = #{a.shop_seq};-->
+<!--    </select>-->
 
     <!--대시보드 예약 조회-->
     <update id="updatePassword" parameterType="hashmap">
@@ -22,8 +22,8 @@
     </update>
 
     <!--패스워드 수정-->
-    <update id="updatePassword" parameterType="hashmap">
-        update T_HAIRSHOP set shop_pw=#{AfterPassword}
-        where shop_name=#{shopName} and shop_pw=#{BeforePassword}
-    </update>
+<!--    <update id="updatePassword" parameterType="hashmap">-->
+<!--        update T_HAIRSHOP set shop_pw=#{AfterPassword}-->
+<!--        where shop_name=#{shopName} and shop_pw=#{BeforePassword}-->
+<!--    </update>-->
 </mapper>
