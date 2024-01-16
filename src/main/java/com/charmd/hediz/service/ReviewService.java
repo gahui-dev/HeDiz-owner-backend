@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface ReviewService {
-    public List<ReviewDTO> reviewFindAll();
+    public List<ReviewDTO> reviewFindAll(int shopSeq);
 
     public ReviewDTO reviewFind(int review_seq);
 

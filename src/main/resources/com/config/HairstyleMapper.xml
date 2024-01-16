@@ -6,10 +6,11 @@
 <mapper namespace="com.config.HairstyleMapper">
 
     <!--모든 헤어스타일 조회-->
-    <select id="hairstyleFindAll" resultType="HairstyleDTO">
+    <select id="hairstyleFindAll" resultType="HairstyleDTO" parameterType="int">
         SELECT style_seq, style_name, style_gender, style_time, style_price, style_intro, style_image, a.cate_seq,cate_name
         FROM T_HAIRSTYLE a
         INNER JOIN T_CATEGORY b ON a.cate_seq = b.cate_seq
+        WHERE a.shop_seq=#{shop_seq}
     </select>
 
     <!--헤어스타일 데이터 추가-->

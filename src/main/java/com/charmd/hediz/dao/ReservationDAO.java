@@ -13,8 +13,8 @@ public class ReservationDAO {
     @Autowired
     SqlSessionTemplate session;
 
-    public List<ReservationDTO> reservationFindAll(){
-        return session.selectList("com.config.ReservationMapper.reservationFindAll");
+    public List<ReservationDTO> reservationFindAll(int shop_seq){
+        return session.selectList("com.config.ReservationMapper.reservationFindAll",shop_seq);
     }
 
     public int reservationUpdate(HashMap<String, Integer> reservationStatAndSeqMap){

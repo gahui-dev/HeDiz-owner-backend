@@ -17,8 +17,8 @@ public class ReviewServiceImpl implements ReviewService {
     ReviewDAO dao;
 
     @Override
-    public List<ReviewDTO> reviewFindAll() {
-        return dao.reviewFindAll();
+    public List<ReviewDTO> reviewFindAll(int shopSeq) {
+        return dao.reviewFindAll(shopSeq);
     }
 
     @Override

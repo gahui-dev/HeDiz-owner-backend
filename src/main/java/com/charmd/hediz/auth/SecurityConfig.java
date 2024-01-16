@@ -32,7 +32,6 @@ public class SecurityConfig {
                                            CorsFilter corsFilter
     ) throws Exception {
         System.out.println("SecurityConfig.filterChain");
-        // /login, /signup 페이지는 모두 허용, 다른 페이지는 인증된 사용자만 허용
         http
                 .csrf().disable()
 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)

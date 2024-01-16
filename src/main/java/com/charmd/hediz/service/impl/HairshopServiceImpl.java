@@ -19,25 +19,9 @@ public class HairshopServiceImpl implements HairshopService{
         return dao.hairshopFind(shop_seq);
     }
 
-    // hairshop 관련 service
-    @Override
-    public List<HairshopDTO> hairshopFindAll() {
-        return dao.hairshopFindAll();
-    }
-
     @Override
     public int hairshopUpdate(HairshopDTO putData) {
         return dao.hairshopUpdate(putData);
-    }
-
-    @Override
-    public int hairshopAdd(HairshopDTO postData) {
-        return dao.hairshopAdd(postData);
-    }
-
-    @Override
-    public int hairshopDelete(int shop_seq) {
-        return dao.hairshopDelete(shop_seq);
     }
 
     @Override

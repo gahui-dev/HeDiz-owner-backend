@@ -19,7 +19,6 @@ public class CustomerController {
     private CustomerService customerService;
 
     // 모든 고객 조회
-    // shop_name 입력으로 들어감
     @GetMapping("{shop_seq}")
     public List<CustomerDTO> allCustomerSelect(@PathVariable("shop_seq") String shopSeq){
         List<CustomerDTO> customerList;

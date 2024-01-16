@@ -33,13 +33,8 @@ public class StaffServiceImpl implements StaffService {
 ////        dao.signUp(staffDto);
 //    }
     @Override
-    public StaffDTO staffFind(int staff_seq) {
-        return dao.staffFind(staff_seq);
-    }
-
-    @Override
-    public List<StaffDTO> staffFindAll() {
-        return dao.staffFindAll();
+    public List<StaffDTO> staffFindAll(int shopSeq) {
+        return dao.staffFindAll(shopSeq);
     }
 
     @Override
@@ -57,14 +52,4 @@ public class StaffServiceImpl implements StaffService {
         return dao.staffDelete(staff_seq);
     }
 
-//    @Override
-//    public StaffDTO getUserById(String staffId) {
-//        return dao.getUserById(staffId);
-//    }
-
-
-    @Override
-    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode) {
-        return dao.findShopSeqAndShopNameUsingShopCode(shopCode);
-    }
 }
