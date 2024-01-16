@@ -18,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.charmd.hediz.jwt.JwtUtil;
 
+import java.util.HashMap;
+
 @Api
 @RestController
 @RequestMapping("/auth")
@@ -64,15 +66,16 @@ public class AuthController {
 
     // id 중복확인
     @PostMapping("/duplicate-check")
-    public void duplicateCheck(@RequestBody HairshopDTO hairshopDto){
-        System.out.println(hairshopDto);
-//        authService.duplicateCheck(hairshopDto);
-
+    public boolean duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
+        String shopId = shopIdMap.get("shop_id");
+        int n = authService.duplicateCheck(shopId);
+        System.out.println("id 개수 : " + n);
+        return n == 0;
     }
 
     // 회원가입
     @PostMapping("/sign-up")
-    public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) { // 회원 가입
+    public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) {
         // 입력된 dto 그대로 반환되기 때문에 따로 변수에 저장은 없음
         String newPw = new BCryptPasswordEncoder().encode(hairshopDto.getShop_pw());
         hairshopDto.setShop_pw(newPw);

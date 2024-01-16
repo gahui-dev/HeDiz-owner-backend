@@ -14,4 +14,9 @@ public class AuthServiceImpl implements AuthService {
     public void signUp(HairshopDTO hairshopDto) {
         dao.signUp(hairshopDto);
     }
+
+    @Override
+    public int duplicateCheck(String shopId) {
+        return dao.duplicateCheck(shopId);
+    }
 }

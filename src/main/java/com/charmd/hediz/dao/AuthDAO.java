@@ -13,4 +13,8 @@ public class AuthDAO {
     public void signUp(HairshopDTO hairshopDto){
         session.insert("com.config.AuthMapper.signUp", hairshopDto);
     }
+
+    public int duplicateCheck(String shopId){
+        return session.selectOne("com.config.AuthMapper.duplicateCheck", shopId);
+    }
 }

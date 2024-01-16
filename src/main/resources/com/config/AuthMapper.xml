@@ -13,6 +13,6 @@
     </insert>
 
     <select id="duplicateCheck" parameterType="string" resultType="int">
-        SELECT COUNT(shop_id) FROM T_HAIRSHOP WHERE shop_id=#{shop_id}
+        SELECT COUNT(shop_id) FROM T_HAIRSHOP WHERE shop_id=#{shopId}
     </select>
 </mapper>
