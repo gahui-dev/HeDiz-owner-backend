@@ -65,11 +65,6 @@ public class StaffServiceImpl implements StaffService {
         return dao.getUserById(staffId);
     }
 
-//    @Override
-    public void signUp(HairshopDTO hairshopDto) {
-        // 암호화 부분 필요
-        dao.signUp(hairshopDto);
-    }
 
     @Override
     public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(String shopCode) {

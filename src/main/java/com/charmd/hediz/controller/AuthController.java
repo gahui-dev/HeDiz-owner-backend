@@ -3,7 +3,7 @@ package com.charmd.hediz.controller;
 import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 import com.charmd.hediz.dto.TokenDTO;
-import com.charmd.hediz.service.StaffService;
+import com.charmd.hediz.service.AuthService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,10 +14,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import com.charmd.hediz.jwt.JwtUtil;
-
-import java.util.HashMap;
 
 @Api
 @RestController
@@ -31,7 +30,7 @@ public class AuthController {
     String tokenKey;
 
     @Autowired
-    private StaffService staffService;
+    private AuthService authService;
 
     // 수정된 staff 관련 메서드
     @PostMapping("/sign-in")
@@ -64,23 +63,11 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) { // 회원 가입
-        System.out.println("AuthController.signup: " + hairshopDto);
-
         // 입력된 dto 그대로 반환되기 때문에 따로 변수에 저장은 없음
-        staffService.signUp(hairshopDto);
-
+        String newPw = new BCryptPasswordEncoder().encode(hairshopDto.getShop_pw());
+        hairshopDto.setShop_pw(newPw);
+        System.out.println("AuthController.signup: " + hairshopDto);
+        authService.signUp(hairshopDto);
         return ResponseEntity.ok(hairshopDto);
     }
-
-
-//    //  를 이용해서 shop_name, shop_seq 얻어오기
-//    @GetMapping("/sign-up/{ }")
-//    public HashMap<String, Object> findShopSeqAndShopNameUsingShopCode(@PathVariable(" ") String shopCode){
-//        HashMap<String, Object> shopSeqAndShopNameMap = new HashMap<>();
-//        shopSeqAndShopNameMap = staffService.findShopSeqAndShopNameUsingShopCode(shopCode);
-//        System.out.println(shopSeqAndShopNameMap);
-//        return shopSeqAndShopNameMap;
-//    }
-
-
 }

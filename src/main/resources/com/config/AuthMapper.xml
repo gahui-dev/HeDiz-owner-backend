@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.config.AuthMapper">
+    <!--회원가입-->
+    <insert id="signUp" parameterType="HairshopDTO">
+        INSERT INTO T_HAIRSHOP (shop_register, shop_id, shop_pw, shop_name, shop_address, shop_phone, shop_start,
+        shop_end, shop_regular, shop_tag, shop_intro, shop_image)
+        VALUES (#{shop_register}, #{shop_id}, #{shop_pw}, #{shop_name}, #{shop_address}, #{shop_phone}, #{shop_start},
+        #{shop_end}, #{shop_regular}, #{shop_tag}, #{shop_intro}, #{shop_image})
+    </insert>
+
+</mapper>
