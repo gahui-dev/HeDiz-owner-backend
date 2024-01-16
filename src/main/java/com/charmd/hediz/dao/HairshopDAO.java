@@ -29,4 +29,8 @@ public class HairshopDAO {
     public List<TempdayDTO> tempdayFind(int shop_seq) {
         return session.selectList("com.config.HairshopMapper.tempdayFind",shop_seq);
     }
+
+    public int tempdayAdd(TempdayDTO postData) {
+        return session.insert("com.config.HairshopMapper.tempdayAdd", postData);
+    }
 }

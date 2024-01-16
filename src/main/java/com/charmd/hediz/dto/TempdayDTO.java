@@ -15,5 +15,6 @@ public class TempdayDTO {
     private int staff_seq;
     private String title;
     private String date;
+    private String temp_offday;
 }
 

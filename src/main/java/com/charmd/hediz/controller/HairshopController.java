@@ -142,17 +142,17 @@ public class HairshopController {
         return "직원 삭제 완료";
     }
 
-    /*
-     * 임시 휴무일 (/closed-day)
-     * */
+   // 임시휴무일 조회
     @GetMapping("closed-day/{shop_seq}")
     public List<TempdayDTO> tempdaySelect(@PathVariable("shop_seq") int shopSeq) {
         List<TempdayDTO> tempdayDto = hairshopService.tempdayFind(shopSeq);
         return tempdayDto;
     }
-//    @PostMapping("closed-day")
-//    public String tempdayInsert(@RequestBody StaffDTO postData) {
-//        int n = hairshopService.staffAdd(postData);
-//        return "휴무일 추가 완료";
-//    }
+
+    //임시휴무일 등록
+    @PostMapping("closed-day")
+    public String tempdayInsert(@RequestBody TempdayDTO postData) {
+        int n = hairshopService.tempdayAdd(postData);
+        return "휴무일 추가 완료";
+    }
 }

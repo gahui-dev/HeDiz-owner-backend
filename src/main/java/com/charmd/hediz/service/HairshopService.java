@@ -13,4 +13,7 @@ public interface HairshopService {
     public int hairshopDelete(int shop_seq);
 
     List<TempdayDTO> tempdayFind(int shopSeq);
+
+    public int tempdayAdd(TempdayDTO postData);
+
 }

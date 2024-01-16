@@ -17,7 +17,9 @@
 
     <!--특정 예약 데이터 조회-->
     <select id="reservationFind" parameterType="int" resultType="ReservationDTO">
-        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat from T_RESERVATION where reserv_seq=#{reservSeq}
+        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat
+        from T_RESERVATION
+        where reserv_seq=#{reservSeq}
     </select>
 
     <!--예약 상태 수정-->
