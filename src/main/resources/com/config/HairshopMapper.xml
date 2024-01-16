@@ -59,6 +59,8 @@
     <!--임시휴무일 추가-->
     <insert id="tempdayAdd" parameterType="TempdayDTO">
         INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_offday)
-            VALUES (#{shop_seq}, #{staff_seq}, #{temp_offday})
+        VALUES (#{shop_seq},
+        (SELECT staff_seq FROM T_STAFF WHERE staff_name = #{staff_name}),
+        #{temp_offday})
     </insert>
 </mapper>

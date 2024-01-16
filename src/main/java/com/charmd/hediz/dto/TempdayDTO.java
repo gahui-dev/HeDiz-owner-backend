@@ -16,5 +16,6 @@ public class TempdayDTO {
     private String title;
     private String date;
     private String temp_offday;
+    private String staff_name;
 }
 
