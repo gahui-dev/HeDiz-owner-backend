@@ -26,7 +26,7 @@ public class StaffServiceImpl implements StaffService {
         staffDto.setStaff_id("cc");
         staffDto.setStaff_pw(samplePwd);
         staffDto.setStaff_name("이가희어제술먹음");
-        staffDto.setStaff_role(1);
+        staffDto.setStaff_role("디자이너");
         staffDto.setStaff_image("img2");
         staffDto.setStaff_phone("010-7593-6191");
         staffDto.setStaff_intro("로그인테스트");
