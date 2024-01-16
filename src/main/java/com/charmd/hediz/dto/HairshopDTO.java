@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +25,6 @@ public class HairshopDTO {
     private Time shop_start;
     private Time shop_end;
     private String shop_phone;
-    private int shop_off;
+    private String shop_off;
     private String shop_tag;
 }

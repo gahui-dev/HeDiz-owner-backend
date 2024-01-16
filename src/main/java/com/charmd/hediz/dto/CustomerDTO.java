@@ -15,4 +15,5 @@ public class CustomerDTO {
     private String cust_id;
     private String cust_phone;
     private String cust_gender;
+    private int cust_visit;
 }

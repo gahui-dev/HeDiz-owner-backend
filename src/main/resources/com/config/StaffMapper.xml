@@ -48,7 +48,6 @@
 <!--        staff_nickname, shop_seq FROM T_STAFF WHERE staff_id=#{staff_id}-->
 <!--    </select>-->
 
-
     <insert id="signUp" parameterType="StaffDTO">
         INSERT INTO T_STAFF ( staff_name, staff_role, staff_image, staff_phone, staff_intro,
         staff_nickname, shop_seq) VALUES

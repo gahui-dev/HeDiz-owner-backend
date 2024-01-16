@@ -6,7 +6,7 @@
 
     <!--고객 데이터 조회-->
     <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">
-        select cust_seq, cust_name, cust_id, cust_phone, cust_gender
+        select cust_seq, cust_name, cust_id, cust_phone, cust_gender, cust_visit
         from T_CUSTOMER
         where cust_seq in (
         select cust_seq
@@ -14,8 +14,7 @@
         where shop_seq = (
         select shop_seq
         from T_HAIRSHOP
-        where shop_name = #{shop_name}
-        )
-        )
+        where shop_seq = #{shop_seq}
+        ))
     </select>
 </mapper>
