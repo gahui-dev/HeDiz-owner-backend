@@ -13,8 +13,8 @@ public class ReviewDAO {
     @Autowired
     SqlSessionTemplate session;
 
-    public List<ReviewDTO> reviewFindAll(){
-        return session.selectList("com.config.ReservationMapper.reviewFindAll");
+    public List<ReviewDTO> reviewFindAll(int shop_seq){
+        return session.selectList("com.config.ReservationMapper.reviewFindAll",shop_seq);
     }
 
     public ReviewDTO reviewFind(int review_seq){

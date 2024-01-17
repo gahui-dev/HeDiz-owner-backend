@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.config.CustomerMapper">
+
+    <!--고객 데이터 조회-->
+    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">
+        WITH CTE
+        AS(SELECT shop_seq
+                 ,cust_seq
+                 ,reserv_time
+                 ,CASE WHEN RESERV_STAT = 0 THEN '취소' ELSE NULL END 'STAT_CANCEL'
+                 ,CASE WHEN RESERV_STAT = 1 THEN '방문완료'  ELSE NULL END 'STAT_COMPLETE'
+                 ,CASE WHEN RESERV_STAT = 2 THEN '노쇼'  ELSE NULL END 'STAT_NOSHOW'
+            FROM T_RESERVATION
+        WHERE SHOP_SEQ = #{SHOP_SEQ})
+        ,PVT
+        AS(SELECT CUST_SEQ
+        ,MAX(STAT_CANCEL) AS STAT_CANCEL
+        ,MAX(STAT_COMPLETE) AS STAT_COMPLETE
+        ,MAX(STAT_NOSHOW) AS STAT_NOSHOW
+        FROM CTE
+        GROUP BY CUST_SEQ, RESERV_TIME)
+
+        SELECT A.cust_seq
+        ,A.cust_name
+        ,A.cust_phone
+        ,A.cust_id
+        ,B.STAT_CANCEL AS 'stat_cancel'
+        ,B.STAT_COMPLETE AS 'stat_complete'
+        ,B.STAT_NOSHOW AS 'stat_noshow'
+        FROM t_customer AS A
+        INNER JOIN(SELECT CUST_SEQ
+        ,COUNT(STAT_CANCEL) AS 'STAT_CANCEL'
+        ,COUNT(STAT_COMPLETE) AS 'STAT_COMPLETE'
+        ,COUNT(STAT_NOSHOW) AS 'STAT_NOSHOW'
+        FROM PVT
+        GROUP BY CUST_SEQ) AS B
+        ON A.CUST_SEQ = B.CUST_SEQ
+        ORDER BY STAT_COMPLETE DESC;
+    </select>
+<!--    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">-->
+<!--        SELECT a.cust_seq, cust_name, cust_id, cust_phone, cust_gender, cust_visit, b.shop_seq-->
+<!--          FROM T_CUSTOMER AS a-->
+<!--         INNER JOIN T_RESERVATION AS b-->
+<!--            ON a.cust_seq = b.cust_seq-->
+<!--         WHERE b.shop_seq = #{shop_seq}-->
+<!--         ORDER BY cust_visit DESC;-->
+<!--    </select>-->
+<!--    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">-->
+<!--        select cust_seq, cust_name, cust_id, cust_phone, cust_gender, cust_visit-->
+<!--        from T_CUSTOMER-->
+<!--        where cust_seq in (-->
+<!--        select cust_seq-->
+<!--        from T_RESERVATION-->
+<!--        where shop_seq = (-->
+<!--        select shop_seq-->
+<!--        from T_HAIRSHOP-->
+<!--        where shop_seq = #{shop_seq}-->
+<!--        ))-->
+<!--    </select>-->
+</mapper>

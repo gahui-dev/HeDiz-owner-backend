@@ -16,8 +16,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Autowired
     ReservationDAO dao;
     @Override
-    public List<ReservationDTO> reservationFindAll() {
-        return dao.reservationFindAll();
+    public List<ReservationDTO> reservationFindAll(int shopSeq) {
+        return dao.reservationFindAll(shopSeq);
     }
 
     @Override

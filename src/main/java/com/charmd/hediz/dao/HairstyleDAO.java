@@ -12,12 +12,8 @@ public class HairstyleDAO {
     @Autowired
     SqlSessionTemplate session;
 
-    public List<HairstyleDTO> hairstyleFindAll() {
-        return session.selectList("com.config.HairstyleMapper.hairstyleFindAll");
-    }
-
-    public HairstyleDTO hairstyleFind(int style_seq) {
-        return session.selectOne("com.config.HairstyleMapper.hairstyleFind", style_seq);
+    public List<HairstyleDTO> hairstyleFindAll(int shopSeq) {
+        return session.selectList("com.config.HairstyleMapper.hairstyleFindAll",shopSeq);
     }
 
     public int hairstyleAdd(HairstyleDTO postData) {

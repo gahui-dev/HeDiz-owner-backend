@@ -12,4 +12,7 @@ public class TokenDTO {
 
     private String jwtauthtoken;
 
+    private int shop_seq;
+    private String shop_name;
+
 }

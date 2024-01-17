@@ -4,28 +4,30 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.config.StaffMapper">
-    <!--특정 직원 조회-->
-    <select id="staffFind" resultType="StaffDTO" parameterType="int">
-        select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq from T_STAFF where staff_seq=#{staff_seq}
-    </select>
-
     <!--모든 직원 조회-->
-    <select id="staffFindAll" resultType="StaffDTO">
-        select staff_seq, staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq from T_STAFF
+    <select id="staffFindAll" resultType="StaffDTO" parameterType="int">
+        select staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq
+        from T_STAFF
+        WHERE shop_seq=#{shop_seq}
     </select>
 
     <!--직원 데이터 수정-->
     <update id="staffUpdate" parameterType="StaffDTO">
-        update T_STAFF set staff_id=#{staff_id}, staff_pw=#{staff_pw}, staff_name=#{staff_name}, staff_role=#{staff_role}, staff_image=#{staff_image} , staff_phone=#{staff_phone}, staff_intro=#{staff_intro}, staff_nickname=#{staff_nickname}, shop_seq=#{shop_seq} where staff_seq=#{staff_seq}
+        update T_STAFF
+        set staff_name=#{staff_name}, staff_role=#{staff_role}, staff_image=#{staff_image} , staff_phone=#{staff_phone},
+        staff_intro=#{staff_intro}, staff_nickname=#{staff_nickname}, shop_seq=#{shop_seq}
+        where staff_seq=#{staff_seq}
     </update>
 
     <!--직원 데이터 추가-->
     <insert id="staffAdd" parameterType="StaffDTO">
-        INSERT INTO T_STAFF (staff_id, staff_pw, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq) VALUES (#{staff_id},#{staff_pw},#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq})
+        INSERT INTO T_STAFF (staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq)
+        VALUES (#{staff_name},#{staff_role},#{staff_image},#{staff_phone},#{staff_intro},#{staff_nickname},#{shop_seq})
     </insert>
 
     <!--직원 데이터 삭제-->
     <delete id="staffDelete" parameterType="int">
         DELETE FROM T_STAFF WHERE staff_seq = #{staff_seq}
     </delete>
+
 </mapper>

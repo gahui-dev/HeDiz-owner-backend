@@ -1,21 +1,48 @@
 package com.charmd.hediz.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Alias("ReservationDTO")
 public class ReservationDTO {
-    int reserv_seq;
-    int style_seq;
-    int cust_seq;
-    int staff_seq;
-    int shop_seq;
-    String reserv_name;
-    String reserv_phone;
-    String reserv_request;
-    Date reserv_time;
-    int reserv_stat;
+//    private String cust_name;
+//    private String cust_phone;
+//    private int reserv_seq;
+//    private String reserv_request;
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+//    private LocalDateTime reserv_time;
+//    private int reserv_stat;
+//    private int style_seq;
+//    private String style_name;
+//    private int staff_seq;
+//    private String staff_name;
+//    private int shop_seq;
+
+    private int reserv_seq;
+    private int style_seq;
+    private int cust_seq;
+    private int shop_seq;
+    private String reserv_request;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime reserv_time;
+    private int reserv_stat;
+    private int staff_seq;
+
+    // join column
+    private String cust_name;
+    private String staff_name;
+    private String style_name;
+    private String cust_phone;
+
 }

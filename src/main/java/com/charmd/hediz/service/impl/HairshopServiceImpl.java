@@ -2,6 +2,7 @@ package com.charmd.hediz.service.impl;
 
 import com.charmd.hediz.dao.HairshopDAO;
 import com.charmd.hediz.dto.HairshopDTO;
+import com.charmd.hediz.dto.TempdayDTO;
 import com.charmd.hediz.service.HairshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,24 +19,18 @@ public class HairshopServiceImpl implements HairshopService{
         return dao.hairshopFind(shop_seq);
     }
 
-    // hairshop 관련 service
-    @Override
-    public List<HairshopDTO> hairshopFindAll() {
-        return dao.hairshopFindAll();
-    }
-
     @Override
     public int hairshopUpdate(HairshopDTO putData) {
         return dao.hairshopUpdate(putData);
     }
 
     @Override
-    public int hairshopAdd(HairshopDTO postData) {
-        return dao.hairshopAdd(postData);
+    public List<TempdayDTO> tempdayFind(int shop_seq) {
+        return dao.tempdayFind(shop_seq);
     }
 
     @Override
-    public int hairshopDelete(int shop_seq) {
-        return dao.hairshopDelete(shop_seq);
+    public int tempdayAdd(TempdayDTO postData) {
+        return dao.tempdayAdd(postData);
     }
 }

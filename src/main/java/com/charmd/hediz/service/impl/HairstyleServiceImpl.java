@@ -15,13 +15,8 @@ public class HairstyleServiceImpl implements HairstyleService {
 
     // hairstyle 관련 service
     @Override
-    public List<HairstyleDTO> hairstyleFindAll() {
-        return dao.hairstyleFindAll();
-    }
-
-    @Override
-    public HairstyleDTO hairstyleFind(int style_seq) {
-        return dao.hairstyleFind(style_seq);
+    public List<HairstyleDTO> hairstyleFindAll(int shopSeq) {
+        return dao.hairstyleFindAll(shopSeq);
     }
 
     @Override
