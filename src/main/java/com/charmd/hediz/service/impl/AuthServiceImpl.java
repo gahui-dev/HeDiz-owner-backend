@@ -6,6 +6,8 @@ import com.charmd.hediz.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service("authService")
 public class AuthServiceImpl implements AuthService {
     @Autowired
@@ -28,5 +30,15 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String findId(String shopRegister) {
         return dao.findId(shopRegister);
+    }
+
+    @Override
+    public int checkPassword(HashMap<String, String> shopIdAndNameMap) {
+        return dao.checkPassword(shopIdAndNameMap);
+    }
+
+    @Override
+    public int changePassword(HashMap<String, String> shopPwMap) {
+        return dao.changePassword(shopPwMap);
     }
 }
