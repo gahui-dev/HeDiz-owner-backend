@@ -34,7 +34,6 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    // sign-in
     @PostMapping("/sign-in")
     public ResponseEntity<TokenDTO> signIn(@RequestBody HashMap<String, String> signInMap) {
         // id 값
@@ -46,10 +45,11 @@ public class AuthController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         int shopSeq = authService.getUserById(id).getShop_seq();
-        String jwt = jwtUtil.createToken(id, shopSeq);
+        String shopName = authService.getUserById(id).getShop_name();
+        String jwt = jwtUtil.createToken(id, shopSeq, shopName);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(tokenKey, "Bearer+" + jwt);
-        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt, shopSeq), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt, shopSeq, shopName), httpHeaders, HttpStatus.OK);
     }
 
     // id 중복확인
