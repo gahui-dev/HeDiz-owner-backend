@@ -32,17 +32,6 @@ public class ReservationController {
         return reservationList;
     }
 
-    // 예약 상태 수정 (reserv_stat)
-    @PutMapping("total/{reserv_seq}") // 수정 대기
-    public ReservationDTO reservationUpdate(@RequestBody int reservStat, @PathVariable("reserv_seq") int reservSeq){
-        HashMap<String, Integer> reservationStatAndSeqMap = new HashMap<>();
-        reservationStatAndSeqMap.put("reserv_stat", reservStat);
-        reservationStatAndSeqMap.put("reserv_seq", reservSeq);
-        int n = reservationService.reservationUpdate(reservationStatAndSeqMap);
-        ReservationDTO reservationDTO = reservationService.reservationFind(reservSeq);
-        return reservationDTO;
-    }
-
     /*
      * 리뷰 관리 (/review)
      * */
@@ -53,14 +42,6 @@ public class ReservationController {
         reviewList = reviewService.reviewFindAll(shopSeq);
         return reviewList;
     }
-
-    // 특정 리뷰 조회
-    // 특정 리뷰 조회가 필요할까 싶음. 밑에 api로 요청하면 전체 리뷰 조회랑 ambigious error 발생
-//    @GetMapping("review/{review_seq}")
-//    public ReviewDTO reviewFind(@PathVariable("review_seq") int reviewSeq){
-//        ReviewDTO reviewDto = reviewService.reviewFind(reviewSeq);
-//        return reviewDto;
-//    }
 
     // 특정 리뷰 답글달기
     @PutMapping("review/{review_seq}")
