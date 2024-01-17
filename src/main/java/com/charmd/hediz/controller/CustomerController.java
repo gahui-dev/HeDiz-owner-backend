@@ -19,7 +19,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     // 모든 고객 조회
-    @GetMapping("{shop_seq}")
+    @GetMapping("total/{shop_seq}")
     public List<CustomerDTO> allCustomerSelect(@PathVariable("shop_seq") String shopSeq){
         List<CustomerDTO> customerList;
         customerList = customerService.allCustomerSelect(shopSeq);
