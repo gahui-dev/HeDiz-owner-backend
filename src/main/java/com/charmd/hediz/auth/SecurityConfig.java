@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .csrf().disable()
 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers( "/auth/sign-in", "/auth/sign-up", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
+                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
                 .anyRequest().authenticated();
 
         //세션을 사용하지 않도록 설정한다.
