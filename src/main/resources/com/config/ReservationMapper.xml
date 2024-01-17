@@ -4,16 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.config.ReservationMapper">
-    <!--전체 예약 데이터 조회-->
-<!--    <select id="reservationFindAll" resultType="ReservationDTO">-->
-<!--        SELECT reserv_seq, a.style_seq, a.cust_seq, staff_seq, a.shop_seq, cust_name, cust_phone, reserv_request, reserv_time, reserv_stat, style_name-->
-<!--            FROM T_RESERVATION a-->
-<!--            INNER JOIN T_CUSTOMER b-->
-<!--                ON a.cust_seq = b.cust_seq-->
-<!--            INNER JOIN T_HAIRSTYLE c-->
-<!--                ON c.style_seq = a.style_seq-->
-<!--            WHERE a.shop_seq = #{a.shop_seq};-->
-<!--    </select>-->
     <select id="reservationFindAll" resultType="ReservationDTO">
         SELECT b.cust_seq, b.cust_name, d.staff_name, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone, a.reserv_time, a.reserv_stat
           FROM T_RESERVATION AS a

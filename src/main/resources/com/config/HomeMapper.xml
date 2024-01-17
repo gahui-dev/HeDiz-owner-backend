@@ -15,15 +15,9 @@
 <!--        WHERE a.shop_seq = #{a.shop_seq};-->
 <!--    </select>-->
 
-    <!--대시보드 예약 조회-->
+    <!--패스워드 수정-->
     <update id="updatePassword" parameterType="hashmap">
         update T_HAIRSHOP set shop_pw=#{AfterPassword}
         where shop_name=#{shopName} and shop_pw=#{BeforePassword}
     </update>
-
-    <!--패스워드 수정-->
-<!--    <update id="updatePassword" parameterType="hashmap">-->
-<!--        update T_HAIRSHOP set shop_pw=#{AfterPassword}-->
-<!--        where shop_name=#{shopName} and shop_pw=#{BeforePassword}-->
-<!--    </update>-->
 </mapper>

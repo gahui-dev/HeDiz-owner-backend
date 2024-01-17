@@ -13,9 +13,11 @@ public class TempdayDTO {
     private int temp_seq;
     private int shop_seq;
     private int staff_seq;
+    private String temp_offday;
+
+    // join column
     private String title;
     private String date;
-    private String temp_offday;
     private String staff_name;
 }
 

@@ -20,5 +20,7 @@ public class HairstyleDTO {
     private String style_price;
     private String style_intro;
     private String style_image;
+
+    // join column
     private String cate_name;
 }

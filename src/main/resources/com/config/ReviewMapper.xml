@@ -5,23 +5,6 @@
 
 <mapper namespace="com.config.ReservationMapper">
     <!--전체 리뷰 조회-->
-<!--    <select id="reviewFindAll" resultType="ReviewDTO">-->
-<!--        SELECT-->
-<!--        tr.review_seq,-->
-<!--        th.shop_name,-->
-<!--        cu.cust_name,-->
-<!--        tr.review_score,-->
-<!--        tr.review_content,-->
-<!--        tr.review_photo,-->
-<!--        tr.review_date,-->
-<!--        tr.review_reply-->
-<!--        FROM-->
-<!--        t_review tr-->
-<!--        LEFT JOIN t_hairshop th ON tr.shop_seq = th.shop_seq-->
-<!--        LEFT JOIN t_reservation re ON tr.reserv_seq = re.reserv_seq-->
-<!--        LEFT JOIN t_customer cu ON tr.reserv_seq = cu.cust_seq-->
-<!--        WHERE tr.shop_seq=#{shop_seq}-->
-<!--    </select>-->
     <select id="reviewFindAll" resultType="ReviewDTO">
         SELECT
         tr.review_seq,
