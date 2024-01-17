@@ -21,4 +21,9 @@ public class ReviewDTO {
     private Date review_date;
     private String review_reply;
     private String cust_name;
+
+    // join column
+    private String staff_name;
+    private String style_name;
+
 }
