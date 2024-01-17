@@ -21,4 +21,8 @@ public class AuthDAO {
     public HairshopDTO getUserById(String shopId){
         return session.selectOne("com.config.AuthMapper.getUserById", shopId);
     }
+
+    public String findId(String shopRegister){
+        return session.selectOne(("com.config.AuthMapper.findId"), shopRegister);
+    }
 }

@@ -17,9 +17,14 @@
     </select>
 
     <!--id를 이용해 user 찾기-->
-    <select id="getUserById" parameterType="String" resultType="HairshopDTO">
+    <select id="getUserById" parameterType="string" resultType="HairshopDTO">
         SELECT shop_seq, shop_name, shop_register, shop_id, shop_pw, shop_address, shop_intro,
         shop_image, shop_start, shop_end, shop_phone, shop_regular, shop_tag, shop_temp
         FROM T_HAIRSHOP WHERE shop_id=#{shop_id}
+    </select>
+
+    <!--shopRegister을 이용해 등록된 shop_id 찾기-->
+    <select id="findId" parameterType="string" resultType="string">
+        SELECT shop_id FROM T_HAIRSHOP WHERE shop_register=#{shopRegister}
     </select>
 </mapper>

@@ -24,4 +24,9 @@ public class AuthServiceImpl implements AuthService {
     public HairshopDTO getUserById(String shopId) {
         return dao.getUserById(shopId);
     }
+
+    @Override
+    public String findId(String shopRegister) {
+        return dao.findId(shopRegister);
+    }
 }

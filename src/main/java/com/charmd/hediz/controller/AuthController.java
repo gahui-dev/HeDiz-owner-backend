@@ -72,4 +72,16 @@ public class AuthController {
         authService.signUp(hairshopDto);
         return ResponseEntity.ok(hairshopDto);
     }
+
+    // ID 찾기
+    @PostMapping("/find-id")
+    public String findId(@RequestBody HashMap<String, String> shopRegisterMap){
+        String shopRegister = shopRegisterMap.get("shop_register");
+
+        // 값 보내야함
+        // 뭘로 확인해야 하나,,,, select shop_id from t_hairshop where shop_register=#{shop_register}
+        // 쿼리 결과가 1이어야 한다.
+        String id = authService.findId(shopRegister);
+        return id;
+    }
 }
