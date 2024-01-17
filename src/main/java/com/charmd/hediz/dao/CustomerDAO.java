@@ -1,5 +1,6 @@
 package com.charmd.hediz.dao;
 
+import com.charmd.hediz.dto.CouponDTO;
 import com.charmd.hediz.dto.CustomerDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,5 +16,9 @@ public class CustomerDAO {
 
     public List<CustomerDTO> allCustomerSelect(String shopName){
         return session.selectList("com.config.CustomerMapper.allCustomerSelect", shopName);
+    }
+
+    public int couponIssue(CouponDTO couponDto){
+        return session.insert("com.config.CustomerMapper.couponIssue", couponDto);
     }
 }
