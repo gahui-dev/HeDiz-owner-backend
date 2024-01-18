@@ -15,7 +15,7 @@
         tr.review_photo,
         tr.review_date,
         tr.review_reply,
-        s.staff_name,
+        s.staff_nickname,
         st.style_name
         FROM
         t_review tr

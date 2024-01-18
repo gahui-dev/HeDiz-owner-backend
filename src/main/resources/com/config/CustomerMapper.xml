@@ -40,24 +40,9 @@
         ON A.CUST_SEQ = B.CUST_SEQ
         ORDER BY STAT_COMPLETE DESC;
     </select>
-<!--    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">-->
-<!--        SELECT a.cust_seq, cust_name, cust_id, cust_phone, cust_gender, cust_visit, b.shop_seq-->
-<!--          FROM T_CUSTOMER AS a-->
-<!--         INNER JOIN T_RESERVATION AS b-->
-<!--            ON a.cust_seq = b.cust_seq-->
-<!--         WHERE b.shop_seq = #{shop_seq}-->
-<!--         ORDER BY cust_visit DESC;-->
-<!--    </select>-->
-<!--    <select id="allCustomerSelect" parameterType="string" resultType="CustomerDTO">-->
-<!--        select cust_seq, cust_name, cust_id, cust_phone, cust_gender, cust_visit-->
-<!--        from T_CUSTOMER-->
-<!--        where cust_seq in (-->
-<!--        select cust_seq-->
-<!--        from T_RESERVATION-->
-<!--        where shop_seq = (-->
-<!--        select shop_seq-->
-<!--        from T_HAIRSHOP-->
-<!--        where shop_seq = #{shop_seq}-->
-<!--        ))-->
-<!--    </select>-->
+
+    <insert id="couponIssue" parameterType="CouponDTO">
+        INSERT INTO T_COUPON (coup_name, coup_expire, coup_discount, cust_seq)
+        VALUES (#{coup_name},#{coup_expire},#{coup_discount},#{cust_seq})
+    </insert>
 </mapper>

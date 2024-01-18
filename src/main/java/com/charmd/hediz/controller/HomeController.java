@@ -5,6 +5,7 @@ import com.charmd.hediz.dto.ReservationDTO;
 import com.charmd.hediz.service.HomeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
 
@@ -19,12 +20,15 @@ public class HomeController {
 
     @GetMapping("dashboard")
     public String dashboard(){
-<<<<<<< HEAD
-        return "가희 테스트";
-=======
 
-        return "대시보드 페이지11";
->>>>>>> main
+        //return "가희 테스트";
+
+
+        //return "대시보드 페이지11";
+
+        System.out.println("톰캣테스트");
+        return "대시보드 페이123123지11";
+
     }
 
     @GetMapping("realtime-reservation")
@@ -48,8 +52,11 @@ public class HomeController {
     // shop_name, 수정 전 패스워드, 수정 후 패스워드 요청된다.
     @PostMapping("mypage/{shop_name}")
     public String mypage(@PathVariable("shop_name") String shopName, @RequestBody HashMap<String, String> passwordMap){
+        System.out.println("암호화 전 해시맵 >>> " + passwordMap);
+        String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("BeforePassword"));
+        passwordMap.put("BeforePassword", newPw);
         passwordMap.put("shopName", shopName);
-        System.out.println("해시맵 >>> " + passwordMap);
+        System.out.println("암호화 후 해시맵 >>> " + passwordMap);
         int n = homeService.updatePassword(passwordMap);
         return n + "건 수정되었습니다.";
     }

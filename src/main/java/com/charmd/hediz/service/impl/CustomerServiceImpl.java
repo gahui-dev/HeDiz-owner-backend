@@ -1,6 +1,7 @@
 package com.charmd.hediz.service.impl;
 
 import com.charmd.hediz.dao.CustomerDAO;
+import com.charmd.hediz.dto.CouponDTO;
 import com.charmd.hediz.dto.CustomerDTO;
 import com.charmd.hediz.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerDTO> allCustomerSelect(String shopName) {
         return dao.allCustomerSelect(shopName);
+    }
+
+    @Override
+    public int couponIssue(CouponDTO couponDto) {
+        return dao.couponIssue(couponDto);
     }
 }

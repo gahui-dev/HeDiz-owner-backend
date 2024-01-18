@@ -133,14 +133,27 @@ public class AuthController {
 
     // ID 찾기
     @PostMapping("/find-id")
-    public String findId(@RequestBody HashMap<String, String> shopRegisterMap){
+    public String findId(@RequestBody HashMap<String, String> shopRegisterMap) {
         String shopRegister = shopRegisterMap.get("shop_register");
-
-        // 값 보내야함
-        // 뭘로 확인해야 하나,,,, select shop_id from t_hairshop where shop_register=#{shop_register}
-        // 쿼리 결과가 1이어야 한다.
         String id = authService.findId(shopRegister);
         return id;
 >>>>>>> main
+    }
+
+    // shop_id, shop_name을 통해 계정있는지 확인
+    @PostMapping("/check-password")
+    public boolean checkPassword(@RequestBody HashMap<String, String> shopIdAndNameMap) {
+        int n = authService.checkPassword(shopIdAndNameMap);
+        return n == 1;
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/change-password")
+    public String changePassword(@RequestBody HashMap<String, String> shopPwMap) {
+        String newPw = new BCryptPasswordEncoder().encode(shopPwMap.get("shop_pw"));
+        shopPwMap.put("shop_pw", newPw);
+        int n = authService.changePassword(shopPwMap);
+        if (n == 1) return "수정되었습니다.";
+        else return "수정되지 않았습니다.";
     }
 }
