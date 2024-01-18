@@ -26,7 +26,7 @@ public class ReviewDTO {
 
     // join column
     private String cust_name;
-    private String staff_name;
+    private String staff_nickname;
     private String style_name;
 
 }
