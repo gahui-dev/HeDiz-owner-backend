@@ -5,7 +5,7 @@
 
 <mapper namespace="com.config.ReservationMapper">
     <select id="reservationFindAll" resultType="ReservationDTO">
-        SELECT b.cust_seq, b.cust_name, d.staff_name, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone, a.reserv_time, a.reserv_stat
+        SELECT b.cust_seq, b.cust_name, d.staff_nickname, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone, a.reserv_time, a.reserv_stat
           FROM T_RESERVATION AS a
          INNER JOIN T_CUSTOMER AS b
             ON a.cust_seq = b.cust_seq
