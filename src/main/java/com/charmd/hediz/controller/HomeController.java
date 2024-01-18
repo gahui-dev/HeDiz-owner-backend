@@ -20,7 +20,7 @@ public class HomeController {
 
     @GetMapping("dashboard")
     public String dashboard(){
-
+        System.out.println("톰캣테스트");
         return "대시보드 페이지11";
     }
 
