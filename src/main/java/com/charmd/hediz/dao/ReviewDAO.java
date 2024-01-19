@@ -5,7 +5,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -21,8 +20,8 @@ public class ReviewDAO {
         return session.selectOne("com.config.ReservationMapper.reviewFind", review_seq);
     }
 
-    public int reviewUpdate(HashMap<String, Object> reviewReplyAndSeqMap){
-        return session.update("com.config.ReservationMapper.reviewUpdate", reviewReplyAndSeqMap);
+    public int reviewUpdate(ReviewDTO reviewData){
+        return session.update("com.config.ReservationMapper.reviewUpdate", reviewData);
     }
 
     public int reviewDelete(int review_seq){

@@ -36,7 +36,7 @@
     </select>
 
     <!--특정 리뷰 답글달기-->
-    <update id="reviewUpdate" parameterType="hashmap">
+    <update id="reviewUpdate" parameterType="ReviewDTO">
         update T_REVIEW set review_reply=#{review_reply} where review_seq=#{review_seq}
     </update>
 

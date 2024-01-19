@@ -65,35 +65,35 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/sign-up")
-    public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) {
+    public ResponseEntity<?> signUp(@RequestBody HairshopDTO hairshopDto) {
         String newPw = new BCryptPasswordEncoder().encode(hairshopDto.getShop_pw());
         hairshopDto.setShop_pw(newPw);
         authService.signUp(hairshopDto);
-        return ResponseEntity.ok(hairshopDto);
+        return ResponseEntity.ok().body(hairshopDto);
     }
 
     // ID 찾기
     @PostMapping("/find-id")
-    public String findId(@RequestBody HashMap<String, String> shopRegisterMap) {
+    public ResponseEntity<?> findId(@RequestBody HashMap<String, String> shopRegisterMap) {
         String shopRegister = shopRegisterMap.get("shop_register");
         String id = authService.findId(shopRegister);
-        return id;
+        return ResponseEntity.ok().body(id);
     }
 
     // shop_id, shop_name을 통해 계정있는지 확인
     @PostMapping("/check-password")
-    public boolean checkPassword(@RequestBody HashMap<String, String> shopIdAndNameMap) {
+    public ResponseEntity<?> checkPassword(@RequestBody HashMap<String, String> shopIdAndNameMap) {
         int n = authService.checkPassword(shopIdAndNameMap);
-        return n == 1;
+        return ResponseEntity.ok().body(n == 1);
     }
 
     // 비밀번호 변경
     @PostMapping("/change-password")
-    public String changePassword(@RequestBody HashMap<String, String> shopPwMap) {
+    public ResponseEntity<?> changePassword(@RequestBody HashMap<String, String> shopPwMap) {
         String newPw = new BCryptPasswordEncoder().encode(shopPwMap.get("shop_pw"));
         shopPwMap.put("shop_pw", newPw);
         int n = authService.changePassword(shopPwMap);
-        if (n == 1) return "수정되었습니다.";
-        else return "수정되지 않았습니다.";
+        if (n == 1) return ResponseEntity.ok().body("수정되었습니다.");
+        else return ResponseEntity.ok().body("수정되지 않았습니다.");
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service("reviewService")
@@ -27,8 +26,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public int reviewUpdate(HashMap<String, Object> reviewReplyAndSeqMap) {
-        return dao.reviewUpdate(reviewReplyAndSeqMap);
+    public int reviewUpdate(ReviewDTO reviewData) {
+        return dao.reviewUpdate(reviewData);
     }
 
     @Override
