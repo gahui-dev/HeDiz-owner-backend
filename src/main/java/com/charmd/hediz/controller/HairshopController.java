@@ -9,6 +9,7 @@ import com.charmd.hediz.service.HairstyleService;
 import com.charmd.hediz.service.StaffService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,10 +50,10 @@ public class HairshopController {
      * */
     // 모든 헤어스타일 조회
     @GetMapping("hairstyle/{shop_seq}")
-    public List<HairstyleDTO> allHairstyleSelect(@PathVariable("shop_seq") int shopSeq) {
+    public ResponseEntity<?> allHairstyleSelect(@PathVariable("shop_seq") int shopSeq) {
         List<HairstyleDTO> hairList;
         hairList = hairstyleService.hairstyleFindAll(shopSeq);
-        return hairList;
+        return ResponseEntity.ok().body(hairList);
     }
 
     // 헤어스타일 데이터 추가
