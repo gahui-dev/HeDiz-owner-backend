@@ -43,12 +43,12 @@ public class HomeController {
 
     // 비밀번호 수정
     // shop_name, 수정 전 패스워드, 수정 후 패스워드 요청된다.
-    @PostMapping("mypage/{shop_name}")
-    public String mypage(@PathVariable("shop_name") String shopName, @RequestBody HashMap<String, String> passwordMap){
+    @PostMapping("mypage/{shop_seq}")
+    public String mypage(@PathVariable("shop_seq") String shopSeq, @RequestBody HashMap<String, String> passwordMap){
         System.out.println("암호화 전 해시맵 >>> " + passwordMap);
         String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("BeforePassword"));
         passwordMap.put("BeforePassword", newPw);
-        passwordMap.put("shopName", shopName);
+        passwordMap.put("shopName", shopSeq);
         System.out.println("암호화 후 해시맵 >>> " + passwordMap);
         int n = homeService.updatePassword(passwordMap);
         return n + "건 수정되었습니다.";

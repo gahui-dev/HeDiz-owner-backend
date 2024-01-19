@@ -18,6 +18,6 @@
     <!--패스워드 수정-->
     <update id="updatePassword" parameterType="hashmap">
         update T_HAIRSHOP set shop_pw=#{AfterPassword}
-        where shop_name=#{shopName} and shop_pw=#{BeforePassword}
+        where shop_seq=#{shopSeq} and shop_pw=#{BeforePassword}
     </update>
 </mapper>

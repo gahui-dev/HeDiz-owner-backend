@@ -52,16 +52,15 @@ public class AuthController {
         return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt, shopSeq, shopName), httpHeaders, HttpStatus.OK);
     }
 
-    // id 중복확인
     @PostMapping("/duplicate-check")
-    public boolean duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
+    public ResponseEntity<?> duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
         String shopId = shopIdMap.get("shop_id");
         if (shopId == null || shopId.trim().isEmpty()) {
-            return false;
+            return ResponseEntity.ok().body(false);
         }
         int n = authService.duplicateCheck(shopId);
         System.out.println("id 개수 : " + n);
-        return n == 0;
+        return ResponseEntity.ok().body(n == 0);
     }
 
     // 회원가입
