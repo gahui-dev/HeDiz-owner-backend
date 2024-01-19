@@ -14,7 +14,7 @@
          INNER JOIN T_STAFF AS d
             ON a.staff_seq = d.staff_seq
          WHERE a.shop_seq = #{a.shop_seq}
-         ORDER BY a.reserv_time desc;
+         ORDER BY a.reserv_date, a.reserv_time desc;
     </select>
 
     <!--특정 예약 데이터 조회-->
