@@ -46,8 +46,8 @@ public class HomeController {
     @PostMapping("mypage/{shop_seq}")
     public String mypage(@PathVariable("shop_seq") String shopSeq, @RequestBody HashMap<String, String> passwordMap){
         System.out.println("암호화 전 해시맵 >>> " + passwordMap);
-        String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("BeforePassword"));
-        passwordMap.put("BeforePassword", newPw);
+        String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("before_password"));
+        passwordMap.put("before_password", newPw);
         passwordMap.put("shopName", shopSeq);
         System.out.println("암호화 후 해시맵 >>> " + passwordMap);
         int n = homeService.updatePassword(passwordMap);
