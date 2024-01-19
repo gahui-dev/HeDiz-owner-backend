@@ -35,5 +35,4 @@ public class HairshopDTO {
     private String shop_phone;
     private String shop_regular;
     private String shop_tag;
-    private String shop_temp;
 }
