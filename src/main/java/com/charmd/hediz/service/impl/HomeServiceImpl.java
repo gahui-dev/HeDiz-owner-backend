@@ -16,4 +16,9 @@ public class HomeServiceImpl implements HomeService {
     public int updatePassword(HashMap<String, Object> passwordMap) {
         return dao.updatePassword(passwordMap);
     }
+
+    @Override
+    public String getPw(int shopSeq) {
+        return dao.getPw(shopSeq);
+    }
 }

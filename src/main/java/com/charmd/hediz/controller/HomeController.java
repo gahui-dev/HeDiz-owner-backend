@@ -47,12 +47,30 @@ public class HomeController {
     @PostMapping("mypage/{shop_seq}")
     public ResponseEntity<?> mypage(@PathVariable("shop_seq") int shopSeq, @RequestBody HashMap<String, Object> passwordMap){
         System.out.println("암호화 전 해시맵 >>> " + passwordMap);
-        String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("before_password").toString());
-        passwordMap.put("before_password", newPw);
-        passwordMap.put("shopSeq", shopSeq);
-        System.out.println("암호화 후 해시맵 >>> " + passwordMap);
-        int n = homeService.updatePassword(passwordMap);
-        return ResponseEntity.ok().body(n + "건 수정되었습니다.");
-    }
+//        String beforePw = new BCryptPasswordEncoder().encode(passwordMap.get("before_password").toString());
 
+        passwordMap.put("shop_seq", shopSeq);
+
+        // DB에서 실제 pw 가져오기
+        String pw = homeService.getPw(shopSeq);
+        System.out.println("..............."+pw);
+        // pw를 가지고 입력한 것과 비교(match)
+
+        // 일치 확인
+        // 원래 pw,
+        boolean matchPw = new BCryptPasswordEncoder().matches((CharSequence) passwordMap.get("before_password"), pw);
+        System.out.println(matchPw);
+        // 일치한다면
+        if (matchPw){
+            System.out.println("일치합니다.");
+            String afterPw = new BCryptPasswordEncoder().encode(passwordMap.get("after_password").toString());
+            passwordMap.put("after_password", afterPw);
+            System.out.println(passwordMap);
+            System.out.println("passwordMap >>> " + passwordMap);
+            int n = homeService.updatePassword(passwordMap);
+            return ResponseEntity.ok().body(n + "건 수정되었습니다.");
+        }else{
+            return ResponseEntity.ok().body("수정되지않았습니다.");
+        }
+    }
 }
