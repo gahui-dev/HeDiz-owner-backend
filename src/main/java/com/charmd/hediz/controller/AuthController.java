@@ -93,7 +93,7 @@ public class AuthController {
         String newPw = new BCryptPasswordEncoder().encode(shopPwMap.get("shop_pw"));
         shopPwMap.put("shop_pw", newPw);
         int n = authService.changePassword(shopPwMap);
-        if (n == 1) return ResponseEntity.ok().body("수정되었습니다.");
-        else return ResponseEntity.ok().body("수정되지 않았습니다.");
+        if (n == 1) return ResponseEntity.ok().body(n);
+        else return ResponseEntity.ok().body(n);
     }
 }
