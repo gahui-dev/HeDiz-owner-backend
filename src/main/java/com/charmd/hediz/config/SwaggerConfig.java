@@ -3,8 +3,10 @@ package com.charmd.hediz.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
@@ -21,15 +23,17 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .securityContexts(Arrays.asList(securityContext()))
-                .securitySchemes(Arrays.asList(apiKey()))
+                .securityContexts(Arrays.asList(securityContext())) // 추가
+                .securitySchemes(Arrays.asList(apiKey(), new ApiKey("jwtauthtoken", "jwtauthtoken", "header"))) // 추가
+                .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.charmd.hediz.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                ;
+                .apiInfo(apiInfo());
     }
 
+    // 추가
     private SecurityContext securityContext() {
         return SecurityContext.builder()
                 .securityReferences(defaultAuth())
@@ -40,10 +44,20 @@ public class SwaggerConfig {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
-        return Arrays.asList(new SecurityReference("Authorization", authorizationScopes));
+        return Arrays.asList(new SecurityReference("Authorization", authorizationScopes),
+                new SecurityReference("jwtauthtoken", authorizationScopes));
+
     }
 
     private ApiKey apiKey() {
         return new ApiKey("Bearer", "Authorization", "header");
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("Backend API")
+                .description("Backend API 문서")
+                .version("1.0")
+                .build();
     }
 }
