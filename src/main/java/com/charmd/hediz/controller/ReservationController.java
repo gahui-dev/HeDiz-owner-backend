@@ -56,8 +56,6 @@ public class ReservationController {
     public ResponseEntity<?> reviewDelete(@PathVariable("review_seq") int reviewSeq){
         int n = reviewService.reviewDelete(reviewSeq);
 
-        return "리뷰 삭제 완료";
-
         return ResponseEntity.ok().body("리뷰 삭제 완료");
     }
 

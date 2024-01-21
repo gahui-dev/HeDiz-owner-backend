@@ -1,14 +1,5 @@
 package com.charmd.hediz.auth;
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.List;
-
-import com.charmd.hediz.dto.MemberDTO;
-import com.charmd.hediz.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
-=======
 import java.util.*;
 
 import com.charmd.hediz.dto.HairshopDTO;
@@ -17,79 +8,28 @@ import com.charmd.hediz.service.AuthService;
 import com.charmd.hediz.service.HairshopService;
 import com.charmd.hediz.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> main
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-
-/*
- *  Spring Security 에서 중요한 역활을 하는 서비스 만들기
- *  
- *  - UserDetailsService 인터페이스를 구현해서 만든다
- */
-
-@Component
-public class CustomUserDetailsService implements UserDetailsService{
-	
-	@Autowired
-	private MemberService service;
-	
-	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		System.out.println("3. CustomUserDetailsService.loadUserByUsername: " + email);
-		System.out.println("email>>>>>>>>>>>" + email);
-		MemberDTO memberDTO=service.getUserByEmail(email);
-		if(memberDTO != null) {
-			List<SimpleGrantedAuthority> list=new ArrayList<>();
-			list.add(new SimpleGrantedAuthority(memberDTO.getStaff_role()));
-			
-			UserDetails userDetails=new org.springframework.security.core.userdetails
-					.User(memberDTO.getStaff_id(), memberDTO.getStaff_pw(), list);
-			System.out.println("3. UserDetails>>>>>>>>>>..." + userDetails);
-	//org.springframework.security.core.userdetails.User [Username=hong@daum.net, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, credentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[USER]]
-			   return userDetails;
-		}else {
-			throw new UsernameNotFoundException(email + " -> 데이터베이스에서 찾을 수 없습니다.");
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
-    @Autowired
-    private AuthService authService;
+	@Autowired
+	private AuthService authService;
 
-    @Override
-    public UserDetails loadUserByUsername(String shopId) throws UsernameNotFoundException {
-        HairshopDTO hairshopDto = authService.getUserById(shopId);
-        if (hairshopDto != null) {
-            List<SimpleGrantedAuthority> list = new ArrayList<>();
-            UserDetails userDetails = new org.springframework.security.core.userdetails
-                    .User(hairshopDto.getShop_id(), hairshopDto.getShop_pw(), list);
-            System.out.println("loadUserByUsername을 통해 가져온 pw" + hairshopDto.getShop_pw());
-            return userDetails;
-        } else {
-            throw new UsernameNotFoundException(shopId + " > 해당 ID는 데이터베이스에서 찾을 수 없습니다.");
-        }
-    }
+	@Override
+	public UserDetails loadUserByUsername(String shopId) throws UsernameNotFoundException {
+		HairshopDTO hairshopDto = authService.getUserById(shopId);
+		if (hairshopDto != null) {
+			List<SimpleGrantedAuthority> list = new ArrayList<>();
+			UserDetails userDetails = new org.springframework.security.core.userdetails
+					.User(hairshopDto.getShop_id(), hairshopDto.getShop_pw(), list);
+			System.out.println("loadUserByUsername을 통해 가져온 pw" + hairshopDto.getShop_pw());
+			return userDetails;
+		} else {
+			throw new UsernameNotFoundException(shopId + " > 해당 ID는 데이터베이스에서 찾을 수 없습니다.");
+		}
+	}
 }
->>>>>>> main
