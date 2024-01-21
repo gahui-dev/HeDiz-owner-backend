@@ -5,7 +5,7 @@
 
 <mapper namespace="com.config.ReservationMapper">
     <select id="reservationFindAll" resultType="ReservationDTO">
-        SELECT b.cust_seq, b.cust_name, d.staff_name, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone, a.reserv_time, a.reserv_stat
+        SELECT b.cust_seq, b.cust_name, d.staff_nickname, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone, a.reserv_date, a.reserv_time, a.reserv_stat
           FROM T_RESERVATION AS a
          INNER JOIN T_CUSTOMER AS b
             ON a.cust_seq = b.cust_seq
@@ -14,12 +14,12 @@
          INNER JOIN T_STAFF AS d
             ON a.staff_seq = d.staff_seq
          WHERE a.shop_seq = #{a.shop_seq}
-         ORDER BY a.reserv_time desc;
+         ORDER BY a.reserv_date, a.reserv_time desc;
     </select>
 
     <!--특정 예약 데이터 조회-->
     <select id="reservationFind" parameterType="int" resultType="ReservationDTO">
-        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_time, reserv_stat
+        select reserv_seq, style_seq, cust_seq, staff_seq, shop_seq, reserv_name, reserv_phone, reserv_request, reserv_date, reserv_time, reserv_stat
         from T_RESERVATION
         where reserv_seq=#{reservSeq}
     </select>

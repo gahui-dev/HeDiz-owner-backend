@@ -5,6 +5,7 @@ import com.charmd.hediz.dto.ReservationDTO;
 import com.charmd.hediz.service.HomeService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
@@ -32,33 +33,39 @@ public class HomeController {
     }
 
     @GetMapping("realtime-reservation")
-    public String realtimeReservation(){
-        return "권동혁 예약 페이지";
+    public ResponseEntity<?> realtimeReservation(){
+        return ResponseEntity.ok().body("권동혁 예약 페이지");
     }
 
     // 예약 상태 수정 (reserv_stat)
     @PutMapping("realtime-reservation/{reserv_seq}") // 수정 대기
-    public ReservationDTO reservationUpdate(@RequestBody int reservStat, @PathVariable("reserv_seq") int reservSeq){
+    public ResponseEntity<?> reservationUpdate(@RequestBody int reservStat, @PathVariable("reserv_seq") int reservSeq){
 //        HashMap<String, Integer> reservationStatAndSeqMap = new HashMap<>();
 //        reservationStatAndSeqMap.put("reserv_stat", reservStat);
 //        reservationStatAndSeqMap.put("reserv_seq", reservSeq);
 //        int n = reservationService.reservationUpdate(reservationStatAndSeqMap);
 //        ReservationDTO reservationDTO = reservationService.reservationFind(reservSeq);
-//        return reservationDTO;
+//        return ResponseEntity.ok().body(reservationDTO);
         return null;
     }
 
     // 비밀번호 수정
     // shop_name, 수정 전 패스워드, 수정 후 패스워드 요청된다.
-    @PostMapping("mypage/{shop_name}")
-    public String mypage(@PathVariable("shop_name") String shopName, @RequestBody HashMap<String, String> passwordMap){
-        System.out.println("암호화 전 해시맵 >>> " + passwordMap);
-        String newPw = new BCryptPasswordEncoder().encode(passwordMap.get("BeforePassword"));
-        passwordMap.put("BeforePassword", newPw);
-        passwordMap.put("shopName", shopName);
-        System.out.println("암호화 후 해시맵 >>> " + passwordMap);
-        int n = homeService.updatePassword(passwordMap);
-        return n + "건 수정되었습니다.";
+    @PostMapping("mypage/{shop_seq}")
+    public ResponseEntity<?> mypage(@PathVariable("shop_seq") int shopSeq, @RequestBody HashMap<String, Object> passwordMap){
+        passwordMap.put("shop_seq", shopSeq);
+        // DB에서 실제 pw 가져오기
+        String pw = homeService.getPw(shopSeq);
+        // pw를 가지고 입력한 것과 비교(match)
+        boolean matchPw = new BCryptPasswordEncoder().matches((CharSequence) passwordMap.get("before_password"), pw);
+        // 일치한다면 비밀번호 변경
+        if (matchPw){
+            String afterPw = new BCryptPasswordEncoder().encode(passwordMap.get("after_password").toString());
+            passwordMap.put("after_password", afterPw);
+            int n = homeService.updatePassword(passwordMap);
+            return ResponseEntity.ok().body(n + "건 수정되었습니다.");
+        }else{
+            return ResponseEntity.ok().body("수정되지않았습니다.");
+        }
     }
-
 }

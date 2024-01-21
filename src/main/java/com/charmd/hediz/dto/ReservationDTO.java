@@ -34,14 +34,16 @@ public class ReservationDTO {
     private int cust_seq;
     private int shop_seq;
     private String reserv_request;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDateTime reserv_date;
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime reserv_time;
     private int reserv_stat;
     private int staff_seq;
 
     // join column
     private String cust_name;
-    private String staff_name;
+    private String staff_nickname;
     private String style_name;
     private String cust_phone;
 

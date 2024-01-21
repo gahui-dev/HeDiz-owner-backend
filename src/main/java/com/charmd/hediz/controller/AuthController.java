@@ -1,15 +1,15 @@
 package com.charmd.hediz.controller;
 
-<<<<<<< HEAD
+
 import com.charmd.hediz.dto.MemberDTO;
 import com.charmd.hediz.dto.TokenDTO;
 import com.charmd.hediz.service.MemberService;
-=======
+
 import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 import com.charmd.hediz.dto.TokenDTO;
 import com.charmd.hediz.service.AuthService;
->>>>>>> main
+
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,13 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-<<<<<<< HEAD
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.charmd.hediz.jwt.JwtUtil;
-
-=======
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +31,6 @@ import com.charmd.hediz.jwt.JwtUtil;
 import java.util.HashMap;
 
 @Api
->>>>>>> main
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -46,7 +42,6 @@ public class AuthController {
     String tokenKey;
 
     @Autowired
-<<<<<<< HEAD
     private MemberService userService;
 
     @GetMapping("dashboard")
@@ -89,7 +84,7 @@ public class AuthController {
         System.out.println(httpHeaders);
         return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt), httpHeaders, HttpStatus.OK);
 
-=======
+
     private AuthService authService;
 
     @PostMapping("/sign-in")
@@ -110,50 +105,52 @@ public class AuthController {
         return new ResponseEntity<>(new TokenDTO("Bearer+" + jwt, shopSeq, shopName), httpHeaders, HttpStatus.OK);
     }
 
-    // id 중복확인
     @PostMapping("/duplicate-check")
-    public boolean duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
+    public ResponseEntity<?> duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
         String shopId = shopIdMap.get("shop_id");
         if (shopId == null || shopId.trim().isEmpty()) {
-            return false;
+            return ResponseEntity.ok().body(false);
         }
         int n = authService.duplicateCheck(shopId);
         System.out.println("id 개수 : " + n);
-        return n == 0;
+        return ResponseEntity.ok().body(n == 0);
     }
 
     // 회원가입
     @PostMapping("/sign-up")
-    public ResponseEntity<HairshopDTO> signUp(@RequestBody HairshopDTO hairshopDto) {
+    public ResponseEntity<?> signUp(@RequestBody HairshopDTO hairshopDto) {
         String newPw = new BCryptPasswordEncoder().encode(hairshopDto.getShop_pw());
         hairshopDto.setShop_pw(newPw);
         authService.signUp(hairshopDto);
-        return ResponseEntity.ok(hairshopDto);
+        return ResponseEntity.ok().body(hairshopDto);
     }
 
     // ID 찾기
     @PostMapping("/find-id")
-    public String findId(@RequestBody HashMap<String, String> shopRegisterMap) {
+    public ResponseEntity<?> findId(@RequestBody HashMap<String, String> shopRegisterMap) {
         String shopRegister = shopRegisterMap.get("shop_register");
         String id = authService.findId(shopRegister);
+
         return id;
->>>>>>> main
+
+        return ResponseEntity.ok().body(id);
+
     }
 
     // shop_id, shop_name을 통해 계정있는지 확인
     @PostMapping("/check-password")
-    public boolean checkPassword(@RequestBody HashMap<String, String> shopIdAndNameMap) {
+    public ResponseEntity<?> checkPassword(@RequestBody HashMap<String, String> shopIdAndNameMap) {
         int n = authService.checkPassword(shopIdAndNameMap);
-        return n == 1;
+        return ResponseEntity.ok().body(n == 1);
     }
 
     // 비밀번호 변경
     @PostMapping("/change-password")
-    public String changePassword(@RequestBody HashMap<String, String> shopPwMap) {
+    public ResponseEntity<?> changePassword(@RequestBody HashMap<String, String> shopPwMap) {
         String newPw = new BCryptPasswordEncoder().encode(shopPwMap.get("shop_pw"));
         shopPwMap.put("shop_pw", newPw);
         int n = authService.changePassword(shopPwMap);
-        if (n == 1) return "수정되었습니다.";
-        else return "수정되지 않았습니다.";
+        if (n == 1) return ResponseEntity.ok().body(n);
+        else return ResponseEntity.ok().body(n);
     }
 }

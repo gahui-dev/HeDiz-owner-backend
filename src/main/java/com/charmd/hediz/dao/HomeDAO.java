@@ -11,7 +11,10 @@ public class HomeDAO {
     @Autowired
     SqlSessionTemplate session;
 
-    public int updatePassword(HashMap<String, String> passwordMap){
+    public int updatePassword(HashMap<String, Object> passwordMap){
         return session.update("com.config.HomeMapper.updatePassword", passwordMap);
+    }
+    public String getPw(int shop_seq){
+        return session.selectOne("com.config.HomeMapper.getPw", shop_seq);
     }
 }
