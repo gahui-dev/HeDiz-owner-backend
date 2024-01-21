@@ -3,6 +3,7 @@ package com.charmd.hediz.controller;
 import com.charmd.hediz.dto.CustomerDTO;
 import com.charmd.hediz.dto.ReservationDTO;
 import com.charmd.hediz.service.HomeService;
+import com.charmd.hediz.service.ReservationService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Api
 @RestController
@@ -19,15 +21,20 @@ public class HomeController {
     @Autowired
     private HomeService homeService;
 
+    @Autowired
+    private ReservationService reservationService;
+
     @GetMapping("dashboard")
     public String dashboard(){
         System.out.println("톰캣테스트");
         return "대시보드 페이123123지11";
     }
 
-    @GetMapping("realtime-reservation")
-    public ResponseEntity<?> realtimeReservation(){
-        return ResponseEntity.ok().body("권동혁 예약 페이지");
+    @GetMapping("realtime-reservation/{shop_seq}")
+    public ResponseEntity<?> realtimeReservation(@PathVariable("shop_seq") int shopSeq){
+        List<ReservationDTO> reservationList;
+        reservationList = reservationService.realtimeFindAll(shopSeq);
+        return ResponseEntity.ok().body(reservationList);
     }
 
     // 예약 상태 수정 (reserv_stat)

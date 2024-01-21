@@ -17,7 +17,13 @@ public class ReservationServiceImpl implements ReservationService {
     ReservationDAO dao;
     @Override
     public List<ReservationDTO> reservationFindAll(int shopSeq) {
+
         return dao.reservationFindAll(shopSeq);
+    }
+
+    @Override
+    public List<ReservationDTO> realtimeFindAll(int shopSeq) {
+        return dao.realtimeFindAll(shopSeq);
     }
 
     @Override

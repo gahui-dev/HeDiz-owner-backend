@@ -38,6 +38,8 @@ public class ReservationDTO {
     private LocalDateTime reserv_date;
     @JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime reserv_time;
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime end_time;
     private int reserv_stat;
     private int staff_seq;
 
@@ -45,6 +47,8 @@ public class ReservationDTO {
     private String cust_name;
     private String staff_nickname;
     private String style_name;
+    @JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime style_time;
     private String cust_phone;
 
 }
