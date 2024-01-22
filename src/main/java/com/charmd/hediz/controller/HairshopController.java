@@ -120,6 +120,7 @@ public class HairshopController {
     //임시휴무일 등록
     @PostMapping("closed-day")
     public ResponseEntity<?> tempdayInsert(@RequestBody TempdayDTO postData) {
+        System.out.println(postData);
         int n = hairshopService.tempdayAdd(postData);
         return ResponseEntity.ok().body("휴무일 추가 완료");
     }
