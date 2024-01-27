@@ -33,17 +33,26 @@
 
     <!-- 휴무일 조회 -->
     <select id="tempdayFind" resultType="TempdayDTO">
-        SELECT temp_seq, te.shop_seq, st.staff_name as title, temp_offday as date
-        FROM T_TEMPDAY te
-        LEFT JOIN T_STAFF st ON te.staff_seq = st.staff_seq
-        where te.shop_seq=#{shop_seq}
+<!--        SELECT temp_seq, te.shop_seq, st.staff_name as title, temp_offday as date-->
+<!--        FROM T_TEMPDAY te-->
+<!--        LEFT JOIN T_STAFF st ON te.staff_seq = st.staff_seq-->
+<!--        where te.shop_seq=#{shop_seq}-->
+        SELECT a.temp_seq, b.staff_seq, b.staff_nickname, a.temp_start, a.temp_end, a.temp_memo, c.shop_regular
+          FROM T_TEMPDAY AS a
+          LEFT JOIN T_STAFF AS b
+            ON a.staff_seq = b.staff_seq
+         INNER JOIN T_HAIRSHOP AS c
+            ON a.shop_seq = c.shop_seq
+         WHERE a.shop_seq = #{shop_seq};
     </select>
 
     <!--임시휴무일 추가-->
     <insert id="tempdayAdd" parameterType="TempdayDTO">
-        INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_offday)
-        VALUES (#{shop_seq},
-        (SELECT staff_seq FROM T_STAFF WHERE staff_name = #{staff_name}),
-        #{temp_offday})
+<!--        INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_offday)-->
+<!--        VALUES (#{shop_seq},-->
+<!--        (SELECT staff_seq FROM T_STAFF WHERE staff_name = #{staff_name}),-->
+<!--        #{temp_offday})-->
+        INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_start, temp_end, temp_memo)
+        VALUES (#{shop_seq}, #{staff_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
     </insert>
 </mapper>

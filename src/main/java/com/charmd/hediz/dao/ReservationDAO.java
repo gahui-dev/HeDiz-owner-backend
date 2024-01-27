@@ -17,6 +17,10 @@ public class ReservationDAO {
         return session.selectList("com.config.ReservationMapper.reservationFindAll",shop_seq);
     }
 
+    public List<ReservationDTO> realtimeFindAll(int shop_seq){
+        return session.selectList("com.config.ReservationMapper.realtimeFindAll",shop_seq);
+    }
+
     public int reservationUpdate(HashMap<String, Integer> reservationStatAndSeqMap){
         return session.update("com.config.ReservationMapper.reservationUpdate", reservationStatAndSeqMap);
     }

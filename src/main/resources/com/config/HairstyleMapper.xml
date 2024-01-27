@@ -11,6 +11,7 @@
         FROM T_HAIRSTYLE a
         INNER JOIN T_CATEGORY b ON a.cate_seq = b.cate_seq
         WHERE a.shop_seq=#{shop_seq}
+        ORDER BY a.cate_seq, style_price DESC, style_name, style_time DESC, style_gender
     </select>
 
     <!--헤어스타일 데이터 추가-->
