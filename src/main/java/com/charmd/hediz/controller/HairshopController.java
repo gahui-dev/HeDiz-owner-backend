@@ -42,7 +42,7 @@ public class HairshopController {
     @PutMapping("info")
     public ResponseEntity<?> hairshopUpdate(@RequestBody HairshopDTO putData) {
         int n = hairshopService.hairshopUpdate(putData);
-        return ResponseEntity.ok().body("미용실 수정 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     /*
@@ -60,7 +60,7 @@ public class HairshopController {
     @PostMapping("hairstyle")
     public ResponseEntity<?> hairstyleInsert(@RequestBody HairstyleDTO postData) {
         int n = hairstyleService.hairstyleAdd(postData);
-        return ResponseEntity.ok().body("헤어스타일 추가 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     // 헤어스타일 데이터 수정
@@ -68,14 +68,14 @@ public class HairshopController {
     // pathvariable 추가
     public ResponseEntity<?> hairstyleUpdate(@RequestBody HairstyleDTO putData) {
         int n = hairstyleService.hairstyleUpdate(putData);
-        return ResponseEntity.ok().body("헤어스타일 수정 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     // 헤어스타일 데이터 삭제
     @DeleteMapping("hairstyle/{style_seq}")
     public ResponseEntity<?> hairstyleDelete(@PathVariable("style_seq") int styleSeq) {
         int n = hairstyleService.hairstyleDelete(styleSeq);
-        return ResponseEntity.ok().body("헤어스타일 삭제 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     /*
@@ -93,21 +93,21 @@ public class HairshopController {
     @PutMapping("staff")
     public ResponseEntity<?> staffUpdate(@RequestBody StaffDTO putData) {
         int n = staffService.staffUpdate(putData);
-        return ResponseEntity.ok().body("직원 수정 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     // 직원 데이터 추가
     @PostMapping("staff")
     public ResponseEntity<?> staffInsert(@RequestBody StaffDTO postData) {
         int n = staffService.staffAdd(postData);
-        return ResponseEntity.ok().body("직원 추가 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     // 직원 데이터 삭제
     @DeleteMapping("staff/{staff_seq}")
     public ResponseEntity<?> staffDelete(@PathVariable("staff_seq") int staffSeq) {
         int n = staffService.staffDelete(staffSeq);
-        return ResponseEntity.ok().body("직원 삭제 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
    // 임시휴무일 조회
@@ -122,6 +122,6 @@ public class HairshopController {
     public ResponseEntity<?> tempdayInsert(@RequestBody TempdayDTO postData) {
         System.out.println(postData);
         int n = hairshopService.tempdayAdd(postData);
-        return ResponseEntity.ok().body("휴무일 추가 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 }

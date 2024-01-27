@@ -48,14 +48,14 @@ public class ReservationController {
     @PutMapping("review")
     public ResponseEntity<?> reviewUpdate(@RequestBody ReviewDTO reviewData){
         int n = reviewService.reviewUpdate(reviewData);
-        return ResponseEntity.ok().body("리뷰 답글 달기 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     // 특정 리뷰 삭제
     @DeleteMapping("review/{review_seq}")
     public ResponseEntity<?> reviewDelete(@PathVariable("review_seq") int reviewSeq){
         int n = reviewService.reviewDelete(reviewSeq);
-        return ResponseEntity.ok().body("리뷰 삭제 완료");
+        return ResponseEntity.ok().body(n==1);
     }
 
     /*

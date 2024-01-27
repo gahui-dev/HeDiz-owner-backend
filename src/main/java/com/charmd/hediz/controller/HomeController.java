@@ -30,6 +30,7 @@ public class HomeController {
         return "대시보드 페이123123지11";
     }
 
+    // 현재 예약 상태 조회
     @GetMapping("realtime-reservation/{shop_seq}")
     public ResponseEntity<?> realtimeReservation(@PathVariable("shop_seq") int shopSeq){
         List<ReservationDTO> reservationList;
@@ -63,9 +64,9 @@ public class HomeController {
             String afterPw = new BCryptPasswordEncoder().encode(passwordMap.get("after_password").toString());
             passwordMap.put("after_password", afterPw);
             int n = homeService.updatePassword(passwordMap);
-            return ResponseEntity.ok().body(n + "건 수정되었습니다.");
+            return ResponseEntity.ok().body(n==1);
         }else{
-            return ResponseEntity.ok().body("수정되지않았습니다.");
+            return ResponseEntity.ok().body(false);
         }
     }
 }
