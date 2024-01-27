@@ -33,17 +33,14 @@
 
     <!-- 휴무일 조회 -->
     <select id="tempdayFind" resultType="TempdayDTO">
-<!--        SELECT temp_seq, te.shop_seq, st.staff_name as title, temp_offday as date-->
-<!--        FROM T_TEMPDAY te-->
-<!--        LEFT JOIN T_STAFF st ON te.staff_seq = st.staff_seq-->
-<!--        where te.shop_seq=#{shop_seq}-->
         SELECT a.temp_seq, b.staff_seq, b.staff_nickname, a.temp_start, a.temp_end, a.temp_memo, c.shop_regular
-          FROM T_TEMPDAY AS a
-          LEFT JOIN T_STAFF AS b
-            ON a.staff_seq = b.staff_seq
-         INNER JOIN T_HAIRSHOP AS c
-            ON a.shop_seq = c.shop_seq
-         WHERE a.shop_seq = #{shop_seq};
+        FROM T_HAIRSHOP AS c
+        LEFT JOIN T_TEMPDAY AS a
+        ON a.shop_seq = c.shop_seq
+        LEFT JOIN T_STAFF AS b
+        ON a.staff_seq = b.staff_seq
+        WHERE c.shop_seq = #{shop_seq}
+
     </select>
 
     <!--임시휴무일 추가-->
