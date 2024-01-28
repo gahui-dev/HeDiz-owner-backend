@@ -33,6 +33,8 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservationList);
     }
 
+    // 예약 상태 변경
+
     /*
      * 리뷰 관리 (/review)
      * */
