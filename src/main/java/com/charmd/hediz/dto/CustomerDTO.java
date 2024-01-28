@@ -21,4 +21,6 @@ public class CustomerDTO {
     private int stat_cancel;
     private int stat_complete;
     private int stat_noshow;
+    private int all_shop_noshow;
+    private int cust_level;
 }
