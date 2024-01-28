@@ -3,6 +3,7 @@ package com.charmd.hediz.controller;
 import com.charmd.hediz.dto.CustomerDTO;
 import com.charmd.hediz.dto.ReservationDTO;
 import com.charmd.hediz.service.HomeService;
+import com.charmd.hediz.service.ReservationService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.spring.web.json.Json;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Api
 @RestController
@@ -18,6 +20,9 @@ import java.util.HashMap;
 public class HomeController {
     @Autowired
     private HomeService homeService;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @GetMapping("dashboard")
     public String dashboard(){
@@ -32,9 +37,12 @@ public class HomeController {
 
     }
 
-    @GetMapping("realtime-reservation")
-    public ResponseEntity<?> realtimeReservation(){
-        return ResponseEntity.ok().body("권동혁 예약 페이지");
+    // 현재 예약 상태 조회
+    @GetMapping("realtime-reservation/{shop_seq}")
+    public ResponseEntity<?> realtimeReservation(@PathVariable("shop_seq") int shopSeq){
+        List<ReservationDTO> reservationList;
+        reservationList = reservationService.realtimeFindAll(shopSeq);
+        return ResponseEntity.ok().body(reservationList);
     }
 
     // 예약 상태 수정 (reserv_stat)
@@ -63,9 +71,9 @@ public class HomeController {
             String afterPw = new BCryptPasswordEncoder().encode(passwordMap.get("after_password").toString());
             passwordMap.put("after_password", afterPw);
             int n = homeService.updatePassword(passwordMap);
-            return ResponseEntity.ok().body(n + "건 수정되었습니다.");
+            return ResponseEntity.ok().body(n==1);
         }else{
-            return ResponseEntity.ok().body("수정되지않았습니다.");
+            return ResponseEntity.ok().body(false);
         }
     }
 }

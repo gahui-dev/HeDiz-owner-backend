@@ -9,6 +9,7 @@
         select staff_seq, staff_name, staff_role, staff_image, staff_phone, staff_intro, staff_nickname, shop_seq
         from T_STAFF
         WHERE shop_seq=#{shop_seq}
+        ORDER BY staff_role DESC, staff_name;
     </select>
 
     <!--직원 데이터 수정-->

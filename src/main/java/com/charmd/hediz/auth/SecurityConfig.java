@@ -26,18 +26,19 @@ public class SecurityConfig {
 	@Value("${jwt.name}")
 	private String jwtName;
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http,
-										   CookieRequestCache cookCache,
-										   CorsFilter corsFilter
-	) throws Exception {
-		System.out.println("SecurityConfig.filterChain");
-		http
-				.csrf().disable()
-				.addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests()
-				.antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
-				.anyRequest().authenticated();
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           CookieRequestCache cookCache,
+                                           CorsFilter corsFilter
+    ) throws Exception {
+        System.out.println("SecurityConfig.filterChain");
+        http
+                .csrf().disable()
+.addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+//                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
+                .anyRequest().authenticated();
 
 		//세션을 사용하지 않도록 설정한다.
 		http
