@@ -117,11 +117,19 @@ public class HairshopController {
         return ResponseEntity.ok().body(tempdayDto);
     }
 
-    //임시휴무일 등록
+    // 직원 휴무일 등록
     @PostMapping("closed-day")
     public ResponseEntity<?> tempdayInsert(@RequestBody TempdayDTO postData) {
         System.out.println(postData);
-        int n = hairshopService.tempdayAdd(postData);
+        int n = hairshopService.staffTempdayAdd(postData);
+        return ResponseEntity.ok().body(n==1);
+    }
+
+    // 미용실 휴무일 등록
+    @PostMapping("closed-day/all")
+    public ResponseEntity<?> allTempdayInsert(@RequestBody TempdayDTO postData) {
+        System.out.println(postData);
+        int n = hairshopService.shopTempdayAdd(postData);
         return ResponseEntity.ok().body(n==1);
     }
 }

@@ -31,7 +31,7 @@
         VALUES (#{shop_name}, #{shop_register}, #{shop_id}, #{shop_pw}, #{shop_address}, #{shop_intro}, #{shop_image}, #{shop_start}, #{shop_end}, #{shop_phone}, #{shop_regular}, #{shop_tag})
     </insert>
 
-    <!-- 휴무일 조회 -->
+    <!--휴무일 조회 -->
     <select id="tempdayFind" resultType="TempdayDTO">
         SELECT a.temp_seq, b.staff_seq, b.staff_nickname, a.temp_start, a.temp_end, a.temp_memo, c.shop_regular
         FROM T_HAIRSHOP AS c
@@ -40,16 +40,18 @@
         LEFT JOIN T_STAFF AS b
         ON a.staff_seq = b.staff_seq
         WHERE c.shop_seq = #{shop_seq}
-
     </select>
 
-    <!--임시휴무일 추가-->
-    <insert id="tempdayAdd" parameterType="TempdayDTO">
-<!--        INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_offday)-->
-<!--        VALUES (#{shop_seq},-->
-<!--        (SELECT staff_seq FROM T_STAFF WHERE staff_name = #{staff_name}),-->
-<!--        #{temp_offday})-->
-        INSERT INTO T_TEMPDAY (shop_seq, staff_seq, temp_start, temp_end, temp_memo)
-        VALUES (#{shop_seq}, #{staff_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
+    <!--직원 휴무일 추가-->
+    <insert id="staffTempdayAdd" parameterType="TempdayDTO">
+        insert into t_tempday_shop(shop_seq, temp_start, temp_end, temp_memo)
+        values (#{shop_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
+    </insert>
+
+
+    <!--미용실 휴무일 추가-->
+    <insert id="shopTempdayAdd" parameterType="TempdayDTO">
+        insert into t_tempday_shop(shop_seq, temp_start, temp_end, temp_memo)
+        values (#{shop_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
     </insert>
 </mapper>

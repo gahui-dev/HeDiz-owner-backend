@@ -30,7 +30,13 @@ public class HairshopServiceImpl implements HairshopService{
     }
 
     @Override
-    public int tempdayAdd(TempdayDTO postData) {
-        return dao.tempdayAdd(postData);
+    public int staffTempdayAdd(TempdayDTO postData) {
+        return dao.staffTempdayAdd(postData);
     }
+
+    @Override
+    public int shopTempdayAdd(TempdayDTO postData) {
+        return dao.shopTempdayAdd(postData);
+    }
+
 }

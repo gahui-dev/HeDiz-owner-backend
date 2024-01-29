@@ -9,6 +9,7 @@ public interface HairshopService {
     public HairshopDTO hairshopFind(int shop_seq);
     public int hairshopUpdate(HairshopDTO putData);
     List<TempdayDTO> tempdayFind(int shopSeq);
-    public int tempdayAdd(TempdayDTO postData);
+    public int staffTempdayAdd(TempdayDTO postData);
+    public int shopTempdayAdd(TempdayDTO postData);
 
 }
