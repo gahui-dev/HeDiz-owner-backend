@@ -4,6 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.config.ReservationMapper">
+    <!-- 전체 예약 조회-->
     <select id="reservationFindAll" resultType="ReservationDTO">
         SELECT b.cust_seq, b.cust_name, d.staff_nickname, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone,
         a.reserv_date, a.reserv_time, a.reserv_stat
@@ -14,7 +15,9 @@
         ON a.style_seq = c.style_seq
         INNER JOIN T_STAFF AS d
         ON a.staff_seq = d.staff_seq
-        WHERE a.shop_seq = #{a.shop_seq}
+        INNER JOIN T_HAIRSHOP AS f
+        ON c.shop_seq = f.shop_seq
+        where f.shop_seq = #{shop_seq}
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
     </select>
 
@@ -70,8 +73,9 @@
         INNER JOIN T_CUSTOMER AS b ON a.cust_seq = b.cust_seq
         INNER JOIN T_HAIRSTYLE AS c ON a.style_seq = c.style_seq
         INNER JOIN T_STAFF AS d ON a.staff_seq = d.staff_seq
-        WHERE a.shop_seq = #{shop_seq} AND a.reserv_time > now()
+        INNER JOIN T_HAIRSHOP AS f ON c.shop_seq = f.shop_seq
+        WHERE f.shop_seq = #{shop_seq} AND a.reserv_time > now()
         AND DATE(a.reserv_date) = CURDATE()
-        ORDER BY a.reserv_date DESC, a.reserv_time DESC, a.reserv_stat, d.staff_seq
+        ORDER BY a.reserv_date DESC, a.reserv_time DESC, a.reserv_stat, d.staff_seq;
     </select>
 </mapper>

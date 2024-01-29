@@ -1,9 +1,13 @@
 package com.charmd.hediz.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +27,7 @@ public class CustomerDTO {
     private int stat_noshow;
     private int all_shop_noshow;
     private int cust_level;
+
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private LocalDateTime last_reserv_date;
 }
