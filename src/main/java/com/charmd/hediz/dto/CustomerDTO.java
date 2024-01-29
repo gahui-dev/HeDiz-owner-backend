@@ -30,4 +30,6 @@ public class CustomerDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDateTime last_reserv_date;
+    private String style_name;
+    private String staff_nickname;
 }
