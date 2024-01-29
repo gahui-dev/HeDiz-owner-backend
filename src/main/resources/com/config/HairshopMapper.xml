@@ -44,7 +44,7 @@
 
     <!--직원 휴무일 추가-->
     <insert id="staffTempdayAdd" parameterType="TempdayDTO">
-        insert into t_tempday_shop(staff_seq, temp_start, temp_end, temp_memo)
+        insert into t_tempday_staff(staff_seq, temp_start, temp_end, temp_memo)
         values (#{staff_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
     </insert>
 
