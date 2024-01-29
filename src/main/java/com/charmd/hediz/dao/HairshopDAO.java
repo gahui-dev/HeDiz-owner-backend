@@ -20,8 +20,11 @@ public class HairshopDAO {
     public int hairshopUpdate(HairshopDTO putData) {
         return session.update("com.config.HairshopMapper.hairshopUpdate", putData);
     }
-    public List<TempdayDTO> tempdayFind(int shop_seq) {
-        return session.selectList("com.config.HairshopMapper.tempdayFind",shop_seq);
+    public List<TempdayDTO> shopTempdayFind(int shop_seq) {
+        return session.selectList("com.config.HairshopMapper.shopTempdayFind",shop_seq);
+    }
+    public List<TempdayDTO> staffTempdayFind(int shop_seq) {
+        return session.selectList("com.config.HairshopMapper.staffTempdayFind",shop_seq);
     }
     public int staffTempdayAdd(TempdayDTO postData) {
         return session.insert("com.config.HairshopMapper.staffTempdayAdd", postData);

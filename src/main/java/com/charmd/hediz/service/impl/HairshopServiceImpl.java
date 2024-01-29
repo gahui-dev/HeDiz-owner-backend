@@ -25,8 +25,13 @@ public class HairshopServiceImpl implements HairshopService{
     }
 
     @Override
-    public List<TempdayDTO> tempdayFind(int shop_seq) {
-        return dao.tempdayFind(shop_seq);
+    public List<TempdayDTO> shopTempdayFind(int shopSeq) {
+        return dao.shopTempdayFind(shopSeq);
+    }
+
+    @Override
+    public List<TempdayDTO> staffTempdayFind(int shopSeq) {
+        return dao.staffTempdayFind(shopSeq);
     }
 
     @Override
