@@ -23,27 +23,27 @@
 
     <!--reserv_stat 조회-->
     <select id="getReservStat" resultType="int" parameterType="int">
-        select reserv_stat from t_reservation where reserv_seq = #{reserv_seq}
+        select reserv_stat from T_RESERVATION where reserv_seq = #{reserv_seq}
     </select>
 
     <!--예약 상태 변경-->
     <update id="reservStatChange" parameterType="hashmap">
-        update t_reservation set reserv_stat = #{reserv_stat} where reserv_seq=#{reserv_seq}
+        update T_RESERVATION set reserv_stat = #{reserv_stat} where reserv_seq=#{reserv_seq}
     </update>
 
     <!--pay_price 조회-->
     <select id="getPayPrice" parameterType="int" resultType="int">
-        select pay_price from t_reservation inner join t_payment using (reserv_seq) where reserv_seq=#{reserv_seq}
+        select pay_price from T_RESERVATION inner join T_PAYMENT using (reserv_seq) where reserv_seq=#{reserv_seq}
     </select>
 
     <!--receipt_id 조회-->
     <select id="getReciptId" parameterType="int" resultType="string">
-        select receipt_id from t_reservation where reserv_seq=#{reserv_seq}
+        select receipt_id from T_RESERVATION where reserv_seq=#{reserv_seq}
     </select>
 
     <!--pay_stat 취소로 변경-->
     <update id="changePayStat" parameterType="int">
-        update t_payment set pay_stat=1 where reserv_seq=#{reserv_seq}
+        update T_PAYMENT set pay_stat=1 where reserv_seq=#{reserv_seq}
     </update>
 
     <!--특정 예약 데이터 조회-->
@@ -79,7 +79,7 @@
         INNER JOIN T_HAIRSTYLE AS c ON a.style_seq = c.style_seq
         INNER JOIN T_STAFF AS d ON a.staff_seq = d.staff_seq
         INNER JOIN T_HAIRSHOP AS f ON c.shop_seq = f.shop_seq
-        WHERE f.shop_seq = #{shop_seq} AND a.reserv_time > now()
+        WHERE f.shop_seq = #{shop_seq}
         AND DATE(a.reserv_date) = CURDATE()
         ORDER BY a.reserv_date DESC, a.reserv_time DESC, a.reserv_stat, d.staff_seq;
     </select>

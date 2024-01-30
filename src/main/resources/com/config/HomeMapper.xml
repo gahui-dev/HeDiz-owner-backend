@@ -23,6 +23,6 @@
 
     <!--패스워드 조회-->
     <select id="getPw" resultType="string">
-        select shop_pw from t_hairshop where shop_seq=#{shop_seq}
+        select shop_pw from T_HAIRSHOP where shop_seq=#{shop_seq}
     </select>
 </mapper>
