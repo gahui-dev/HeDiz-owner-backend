@@ -79,7 +79,7 @@
         INNER JOIN T_HAIRSTYLE AS c ON a.style_seq = c.style_seq
         INNER JOIN T_STAFF AS d ON a.staff_seq = d.staff_seq
         INNER JOIN T_HAIRSHOP AS f ON c.shop_seq = f.shop_seq
-        WHERE f.shop_seq = #{shop_seq}
+        WHERE f.shop_seq = #{shop_seq} AND a.reserv_time > now()
         AND DATE(a.reserv_date) = CURDATE()
         ORDER BY a.reserv_date DESC, a.reserv_time DESC, a.reserv_stat, d.staff_seq;
     </select>
