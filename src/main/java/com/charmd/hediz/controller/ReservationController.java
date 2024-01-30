@@ -39,7 +39,11 @@ public class ReservationController {
         HashMap<String, Integer> reservSeqAndStatMap = new HashMap<>();
         reservSeqAndStatMap.put("reserv_seq", reserv_seq);
         reservSeqAndStatMap.put("reserv_stat", reserv_stat);
-        boolean isChanged = reservationService.reservStatChange(reservSeqAndStatMap);
+        boolean isChanged = false;
+        // 기존 reserv_stat 값이 0인 경우에만 바뀌게 처리
+        if(reservationService.getReservStat(reserv_seq) == 0) {
+            isChanged = reservationService.reservStatChange(reservSeqAndStatMap);
+        }
         return ResponseEntity.ok().body(isChanged);
     }
 

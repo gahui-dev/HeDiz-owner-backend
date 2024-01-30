@@ -24,6 +24,11 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public int getReservStat(int reserv_seq) {
+        return dao.getReservStat(reserv_seq);
+    }
+
+    @Override
     @Transactional
     public boolean reservStatChange(HashMap<String, Integer> reservSeqAndStatMap) {
         // reserv_seq = 1, 방문 완료

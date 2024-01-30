@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ReservationService {
     public List<ReservationDTO> reservationFindAll(int shopSeq);
+    public int getReservStat(int reserv_seq);
     public boolean reservStatChange(HashMap<String, Integer> reservSeqAndStatMap);
     public List<ReservationDTO> realtimeFindAll(int shopSeq);
     public int reservationUpdate(HashMap<String, Integer> reservationStatAndSeqMap);

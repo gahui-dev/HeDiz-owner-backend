@@ -21,6 +21,11 @@
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
     </select>
 
+    <!--reserv_stat 조회-->
+    <select id="getReservStat" resultType="int" parameterType="int">
+        select reserv_stat from t_reservation where reserv_seq = #{reserv_seq}
+    </select>
+
     <!--예약 상태 변경-->
     <update id="reservStatChange" parameterType="hashmap">
         update t_reservation set reserv_stat = #{reserv_stat} where reserv_seq=#{reserv_seq}
