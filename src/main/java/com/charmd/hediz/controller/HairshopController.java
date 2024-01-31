@@ -16,6 +16,7 @@ import java.util.List;
 
 @Api
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/hairshop")
 public class HairshopController {
     @Autowired

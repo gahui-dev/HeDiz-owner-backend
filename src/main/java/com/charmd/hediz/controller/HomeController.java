@@ -16,6 +16,7 @@ import java.util.List;
 
 @Api
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/home")
 public class HomeController {
     @Autowired
