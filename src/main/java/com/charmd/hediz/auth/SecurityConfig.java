@@ -35,12 +35,13 @@ public class SecurityConfig {
         System.out.println("SecurityConfig.filterChain");
         http
                 .csrf().disable()
-.addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 //                .antMatchers("/**").permitAll()
 //                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 //                .anyRequest().authenticated();
+
 
         //세션을 사용하지 않도록 설정한다.
         http

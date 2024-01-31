@@ -34,29 +34,29 @@
     <!--미용실 임시 휴무일 조회 -->
     <select id="shopTempdayFind" resultType="TempdayDTO">
         select shop_seq, temp_start, temp_end, shop_regular, temp_memo
-        from t_tempday_shop
-        inner join t_hairshop using(shop_seq)
+        from T_TEMPDAY_SHOP
+        inner join T_HAIRSHOP using(shop_seq)
         where shop_seq=#{shop_seq}
     </select>
 
     <!--직원 임시 휴무일 조회 -->
     <select id="staffTempdayFind" resultType="TempdayDTO">
         select shop_seq, staff_seq, staff_nickname, temp_start, temp_end, temp_memo
-        from t_tempday_staff
-        inner join t_staff using(staff_seq)
+        from T_TEMPDAY_STAFF
+        inner join T_STAFF using(staff_seq)
         where shop_seq = #{shop_seq}
     </select>
 
     <!--직원 휴무일 추가-->
     <insert id="staffTempdayAdd" parameterType="TempdayDTO">
-        insert into t_tempday_staff(staff_seq, temp_start, temp_end, temp_memo)
+        insert into T_TEMPDAY_STAFF(staff_seq, temp_start, temp_end, temp_memo)
         values (#{staff_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
     </insert>
 
 
     <!--미용실 휴무일 추가-->
     <insert id="shopTempdayAdd" parameterType="TempdayDTO">
-        insert into t_tempday_shop(shop_seq, temp_start, temp_end, temp_memo)
+        insert into T_TEMPDAY_SHOP(shop_seq, temp_start, temp_end, temp_memo)
         values (#{shop_seq}, #{temp_start}, #{temp_end}, #{temp_memo})
     </insert>
 </mapper>
