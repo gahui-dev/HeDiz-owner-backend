@@ -37,9 +37,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 //                .antMatchers("/**").permitAll()
-                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll();
+//                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 //                .anyRequest().authenticated();
 
 
