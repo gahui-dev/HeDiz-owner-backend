@@ -39,6 +39,13 @@ public class HomeController {
         return ResponseEntity.ok().body(reservationList);
     }
 
+    @GetMapping("realtime-reservation/{shop_seq}/current")
+    public ResponseEntity<?> realtimeReservationCurrent(@PathVariable("shop_seq") int shopSeq){
+        List<ReservationDTO> reservationList;
+        reservationList = reservationService.realtimeFindCurrent(shopSeq);
+        return ResponseEntity.ok().body(reservationList);
+    }
+
     // 예약 상태 수정 (reserv_stat)
     @PutMapping("realtime-reservation/{reserv_seq}") // 수정 대기
     public ResponseEntity<?> reservationUpdate(@RequestBody int reservStat, @PathVariable("reserv_seq") int reservSeq){

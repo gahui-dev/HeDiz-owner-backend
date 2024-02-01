@@ -23,6 +23,8 @@ public class ReservationServiceImpl implements ReservationService {
         return dao.reservationFindAll(shopSeq);
     }
 
+
+
     @Override
     public int getReservStat(int reserv_seq) {
         return dao.getReservStat(reserv_seq);
@@ -79,6 +81,10 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<ReservationDTO> realtimeFindAll(int shopSeq) {
         return dao.realtimeFindAll(shopSeq);
+    }
+    @Override
+    public List<ReservationDTO> realtimeFindCurrent(int shopSeq) {
+        return dao.reservationFindCurrent(shopSeq);
     }
 
     @Override

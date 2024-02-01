@@ -40,6 +40,9 @@ public class ReservationDAO {
     public List<ReservationDTO> realtimeFindAll(int shop_seq){
         return session.selectList("com.config.ReservationMapper.realtimeFindAll",shop_seq);
     }
+    public List<ReservationDTO> reservationFindCurrent(int shop_seq) {
+        return session.selectList("com.config.ReservationMapper.realtimeFindCurrent",shop_seq);
+    }
 
     public int reservationUpdate(HashMap<String, Integer> reservationStatAndSeqMap){
         return session.update("com.config.ReservationMapper.reservationUpdate", reservationStatAndSeqMap);
@@ -48,5 +51,6 @@ public class ReservationDAO {
     public ReservationDTO reservationFind(int reservSeq){
         return session.selectOne("com.config.ReservationMapper.reservationFind", reservSeq);
     }
+
 
 }
