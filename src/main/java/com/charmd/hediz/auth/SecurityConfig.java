@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll();
 //                .antMatchers("/**").permitAll()
-//                .an    tMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
+//                .antMatchers( "/auth/**" , "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 //                .anyRequest().authenticated();
 
 
