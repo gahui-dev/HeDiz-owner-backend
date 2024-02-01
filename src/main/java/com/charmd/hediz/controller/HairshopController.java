@@ -16,6 +16,7 @@ import java.util.List;
 
 @Api
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/hairshop")
 public class HairshopController {
     @Autowired
@@ -110,18 +111,33 @@ public class HairshopController {
         return ResponseEntity.ok().body(n==1);
     }
 
-   // 임시휴무일 조회
-    @GetMapping("closed-day/{shop_seq}")
-    public ResponseEntity<?> tempdaySelect(@PathVariable("shop_seq") int shopSeq) {
-        List<TempdayDTO> tempdayDto = hairshopService.tempdayFind(shopSeq);
+   // 미용실 임시휴무일 조회
+    @GetMapping("closed-day/shop/{shop_seq}")
+    public ResponseEntity<?> shopTempdayFind(@PathVariable("shop_seq") int shop_seq) {
+        List<TempdayDTO> tempdayDto = hairshopService.shopTempdayFind(shop_seq);
         return ResponseEntity.ok().body(tempdayDto);
     }
 
-    //임시휴무일 등록
+   // 직원 임시휴무일 조회
+    @GetMapping("closed-day/staff/{shop_seq}")
+    public ResponseEntity<?> staffTempdayFind(@PathVariable("shop_seq") int shop_seq) {
+        List<TempdayDTO> tempdayDto = hairshopService.staffTempdayFind(shop_seq);
+        return ResponseEntity.ok().body(tempdayDto);
+    }
+
+    // 직원 휴무일 등록
     @PostMapping("closed-day")
     public ResponseEntity<?> tempdayInsert(@RequestBody TempdayDTO postData) {
         System.out.println(postData);
-        int n = hairshopService.tempdayAdd(postData);
+        int n = hairshopService.staffTempdayAdd(postData);
+        return ResponseEntity.ok().body(n==1);
+    }
+
+    // 미용실 휴무일 등록
+    @PostMapping("closed-day/all")
+    public ResponseEntity<?> allTempdayInsert(@RequestBody TempdayDTO postData) {
+        System.out.println(postData);
+        int n = hairshopService.shopTempdayAdd(postData);
         return ResponseEntity.ok().body(n==1);
     }
 }

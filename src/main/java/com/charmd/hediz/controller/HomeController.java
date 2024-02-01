@@ -16,6 +16,7 @@ import java.util.List;
 
 @Api
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/home")
 public class HomeController {
     @Autowired
@@ -42,6 +43,13 @@ public class HomeController {
     public ResponseEntity<?> realtimeReservation(@PathVariable("shop_seq") int shopSeq){
         List<ReservationDTO> reservationList;
         reservationList = reservationService.realtimeFindAll(shopSeq);
+        return ResponseEntity.ok().body(reservationList);
+    }
+
+    @GetMapping("realtime-reservation/{shop_seq}/current")
+    public ResponseEntity<?> realtimeReservationCurrent(@PathVariable("shop_seq") int shopSeq){
+        List<ReservationDTO> reservationList;
+        reservationList = reservationService.realtimeFindCurrent(shopSeq);
         return ResponseEntity.ok().body(reservationList);
     }
 

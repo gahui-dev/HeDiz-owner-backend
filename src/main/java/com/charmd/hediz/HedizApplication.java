@@ -5,6 +5,8 @@ import com.charmd.hediz.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.PropertySource;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +16,7 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @PropertySource(value = "classpath:custom.properties")
-public class HedizApplication {
+public class HedizApplication extends SpringBootServletInitializer {
 
 
 //	@Autowired
@@ -43,5 +45,8 @@ public class HedizApplication {
 
 		SpringApplication.run(HedizApplication.class, args);
 	}
-
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder){
+		return builder.sources(HedizApplication.class);
+	}
 }

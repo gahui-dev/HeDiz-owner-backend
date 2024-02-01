@@ -17,8 +17,31 @@ public class ReservationDAO {
         return session.selectList("com.config.ReservationMapper.reservationFindAll",shop_seq);
     }
 
+    public int getReservStat(int reserv_seq){
+        return session.selectOne("com.config.ReservationMapper.getReservStat", reserv_seq);
+    }
+
+    public int reservStatChange(HashMap<String, Integer> reservSeqAndStatMap){
+        return session.update("com.config.ReservationMapper.reservStatChange", reservSeqAndStatMap);
+    }
+
+    public int getPayPrice(int reserv_seq){
+        return session.selectOne("com.config.ReservationMapper.getPayPrice", reserv_seq);
+    }
+
+    public String getReciptId(int reserv_seq){
+        return session.selectOne("com.config.ReservationMapper.getReciptId", reserv_seq);
+    }
+
+    public int changePayStat(int reserv_seq){
+        return session.update("com.config.ReservationMapper.changePayStat", reserv_seq);
+    }
+
     public List<ReservationDTO> realtimeFindAll(int shop_seq){
         return session.selectList("com.config.ReservationMapper.realtimeFindAll",shop_seq);
+    }
+    public List<ReservationDTO> reservationFindCurrent(int shop_seq) {
+        return session.selectList("com.config.ReservationMapper.realtimeFindCurrent",shop_seq);
     }
 
     public int reservationUpdate(HashMap<String, Integer> reservationStatAndSeqMap){
@@ -28,5 +51,6 @@ public class ReservationDAO {
     public ReservationDTO reservationFind(int reservSeq){
         return session.selectOne("com.config.ReservationMapper.reservationFind", reservSeq);
     }
+
 
 }
