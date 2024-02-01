@@ -37,6 +37,7 @@ public class AuthController {
 
     @PostMapping("/sign-in")
     public ResponseEntity<TokenDTO> signIn(@RequestBody HashMap<String, String> signInMap) {
+        System.out.println("로그인 페이지");
         // id 값
         String id = signInMap.get("shop_id");
         String pw = signInMap.get("shop_pw");
@@ -55,6 +56,7 @@ public class AuthController {
 
     @PostMapping("/duplicate-check")
     public ResponseEntity<?> duplicateCheck(@RequestBody HashMap<String, String> shopIdMap) {
+        System.out.println("중복확인");
         String shopId = shopIdMap.get("shop_id");
         if (shopId == null || shopId.trim().isEmpty()) {
             return ResponseEntity.ok().body(false);
