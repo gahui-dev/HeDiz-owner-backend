@@ -13,9 +13,9 @@
         reserv_date,
         style_name,
         staff_nickname,
-        CASE WHEN RESERV_STAT = 0 THEN '취소' ELSE NULL END AS 'STAT_CANCEL',
         CASE WHEN RESERV_STAT = 1 THEN '방문완료' ELSE NULL END AS 'STAT_COMPLETE',
-        CASE WHEN RESERV_STAT = 2 THEN '노쇼' ELSE NULL END AS 'STAT_NOSHOW',
+        CASE WHEN RESERV_STAT = 2 THEN '취소' ELSE NULL END AS 'STAT_CANCEL',
+        CASE WHEN RESERV_STAT = 3 THEN '노쇼' ELSE NULL END AS 'STAT_NOSHOW',
         ROW_NUMBER() OVER (PARTITION BY cust_seq ORDER BY reserv_date DESC) AS RowNum
         FROM
         T_RESERVATION
@@ -23,7 +23,7 @@
         JOIN T_HAIRSHOP ON T_HAIRSTYLE.shop_seq = T_HAIRSHOP.shop_seq
         JOIN T_STAFF ON T_RESERVATION.staff_seq = T_STAFF.staff_seq
         WHERE
-        T_HAIRSHOP.shop_seq = 1
+        T_HAIRSHOP.shop_seq = #{shop_seq}
         ),
         PVT AS (
         SELECT
@@ -44,7 +44,7 @@
         FROM
         T_RESERVATION
         WHERE
-        RESERV_STAT = 2
+        RESERV_STAT = 3
         GROUP BY
         cust_seq
         )
@@ -58,9 +58,9 @@
         B.STAT_NOSHOW AS 'stat_noshow',
         IFNULL(C.ALL_SHOP_NOSHOW, 0) AS 'all_shop_noshow',
         (SELECT cust_level FROM T_CUSTOMER WHERE cust_seq = A.cust_seq) AS cust_level,
-        (SELECT reserv_date FROM CTE WHERE cust_seq = A.cust_seq AND RowNum = 1) AS last_reserv_date,
-        CTE.style_name,
-        CTE.staff_nickname
+        (SELECT reserv_date FROM CTE WHERE cust_seq = A.cust_seq AND STAT_COMPLETE = '방문완료' ORDER BY reserv_date DESC LIMIT 1) AS last_reserv_date,
+        (SELECT style_name FROM CTE WHERE cust_seq = A.cust_seq AND STAT_COMPLETE = '방문완료' ORDER BY reserv_date DESC LIMIT 1) AS style_name,
+        (SELECT staff_nickname FROM CTE WHERE cust_seq = A.cust_seq AND STAT_COMPLETE = '방문완료' ORDER BY reserv_date DESC LIMIT 1) AS staff_nickname
         FROM
         T_CUSTOMER AS A
         INNER JOIN (
@@ -75,16 +75,6 @@
         CUST_SEQ
         ) AS B ON A.CUST_SEQ = B.CUST_SEQ
         LEFT JOIN ALL_SHOP_NOSHOW AS C ON A.CUST_SEQ = C.cust_seq
-        LEFT JOIN (
-        SELECT
-        cust_seq,
-        style_name,
-        staff_nickname
-        FROM
-        CTE
-        WHERE
-        RowNum = 1
-        ) AS CTE ON A.CUST_SEQ = CTE.cust_seq
         ORDER BY
         STAT_COMPLETE DESC;
     </select>
