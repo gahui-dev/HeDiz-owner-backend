@@ -50,5 +50,6 @@ public class ReservationDTO {
     @JsonFormat(pattern = "HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime style_time;
     private String cust_phone;
+    private int pay_price;
 
 }
