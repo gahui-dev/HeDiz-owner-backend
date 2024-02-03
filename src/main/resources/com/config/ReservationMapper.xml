@@ -7,7 +7,7 @@
     <!-- 전체 예약 조회-->
     <select id="reservationFindAll" resultType="ReservationDTO">
         SELECT b.cust_seq, b.cust_name, d.staff_nickname, c.style_name, a.reserv_seq, a.reserv_request, b.cust_phone,
-        a.reserv_date, a.reserv_time, a.reserv_stat
+        a.reserv_date, a.reserv_time, a.reserv_stat, g.pay_price
         FROM T_RESERVATION AS a
         INNER JOIN T_CUSTOMER AS b
         ON a.cust_seq = b.cust_seq
@@ -17,6 +17,8 @@
         ON a.staff_seq = d.staff_seq
         INNER JOIN T_HAIRSHOP AS f
         ON c.shop_seq = f.shop_seq
+        INNER JOIN T_PAYMENT AS g
+        ON g.reserv_seq = a.reserv_seq
         where f.shop_seq = #{shop_seq}
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
     </select>
