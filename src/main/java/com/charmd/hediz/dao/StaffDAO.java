@@ -1,6 +1,5 @@
 package com.charmd.hediz.dao;
 
-import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,10 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Builder
 @NoArgsConstructor

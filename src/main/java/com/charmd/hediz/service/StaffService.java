@@ -1,9 +1,7 @@
 package com.charmd.hediz.service;
 
-import com.charmd.hediz.dto.HairshopDTO;
 import com.charmd.hediz.dto.StaffDTO;
 
-import java.util.HashMap;
 import java.util.List;
 
 public interface StaffService {
