@@ -1,6 +1,5 @@
 package com.charmd.hediz.controller;
 
-import com.charmd.hediz.dto.CustomerDTO;
 import com.charmd.hediz.dto.ReservationDTO;
 import com.charmd.hediz.service.HomeService;
 import com.charmd.hediz.service.ReservationService;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,18 +49,6 @@ public class HomeController {
         List<ReservationDTO> reservationList;
         reservationList = reservationService.realtimeFindCurrent(shopSeq);
         return ResponseEntity.ok().body(reservationList);
-    }
-
-    // 예약 상태 수정 (reserv_stat)
-    @PutMapping("realtime-reservation/{reserv_seq}") // 수정 대기
-    public ResponseEntity<?> reservationUpdate(@RequestBody int reservStat, @PathVariable("reserv_seq") int reservSeq){
-//        HashMap<String, Integer> reservationStatAndSeqMap = new HashMap<>();
-//        reservationStatAndSeqMap.put("reserv_stat", reservStat);
-//        reservationStatAndSeqMap.put("reserv_seq", reservSeq);
-//        int n = reservationService.reservationUpdate(reservationStatAndSeqMap);
-//        ReservationDTO reservationDTO = reservationService.reservationFind(reservSeq);
-//        return ResponseEntity.ok().body(reservationDTO);
-        return null;
     }
 
     // 비밀번호 수정

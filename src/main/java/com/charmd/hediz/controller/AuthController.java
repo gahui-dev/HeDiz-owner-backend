@@ -1,7 +1,6 @@
 package com.charmd.hediz.controller;
 
 import com.charmd.hediz.dto.HairshopDTO;
-import com.charmd.hediz.dto.StaffDTO;
 import com.charmd.hediz.dto.TokenDTO;
 import com.charmd.hediz.service.AuthService;
 import io.swagger.annotations.Api;
