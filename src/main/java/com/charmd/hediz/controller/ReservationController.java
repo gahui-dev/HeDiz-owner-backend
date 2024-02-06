@@ -41,8 +41,6 @@ public class ReservationController {
         reservSeqAndStatMap.put("reserv_seq", reserv_seq);
         reservSeqAndStatMap.put("reserv_stat", reserv_stat);
         boolean isChanged = false;
-
-        System.out.println("입력된 reserv_seq의 reserv_stat >> " + reservationService.getReservStat(reserv_seq));
         // 기존 reserv_stat 값이 0인 경우에만 바뀌게 처리
         if(reservationService.getReservStat(reserv_seq) == 0) {
             isChanged = reservationService.reservStatChange(reservSeqAndStatMap);

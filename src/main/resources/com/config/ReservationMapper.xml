@@ -45,7 +45,7 @@
 
     <!--pay_stat 취소로 변경-->
     <update id="changePayStat" parameterType="int">
-        update T_PAYMENT set pay_stat=1 where reserv_seq=#{reserv_seq}
+        update T_PAYMENT set pay_stat=1, pay_price = pay_price * 0.1  where reserv_seq=#{reserv_seq}
     </update>
 
     <!--특정 예약 데이터 조회-->
