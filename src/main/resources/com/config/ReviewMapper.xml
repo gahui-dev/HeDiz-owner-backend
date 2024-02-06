@@ -24,6 +24,7 @@
         LEFT JOIN T_HAIRSHOP ha ON st.shop_seq = ha.shop_seq
         LEFT JOIN T_CUSTOMER cu ON re.cust_seq = cu.cust_seq
         LEFT JOIN T_STAFF s ON re.staff_seq = s.staff_seq
+        WHERE ha.shop_seq = #{shop_seq}
         ORDER BY tr.review_date desc;
     </select>
 
