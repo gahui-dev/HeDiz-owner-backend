@@ -15,8 +15,9 @@
         tr.review_date,
         tr.review_reply,
         s.staff_nickname,
-        st.style_name  ,
-        re.reserv_seq
+        st.style_name,
+        re.reserv_seq,
+        re.reserv_date
         from T_REVIEW tr
 
         LEFT JOIN T_RESERVATION re ON tr.reserv_seq = re.reserv_seq

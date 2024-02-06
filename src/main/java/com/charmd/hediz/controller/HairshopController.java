@@ -114,15 +114,15 @@ public class HairshopController {
    // 미용실 임시휴무일 조회
     @GetMapping("closed-day/shop/{shop_seq}")
     public ResponseEntity<?> shopTempdayFind(@PathVariable("shop_seq") int shop_seq) {
-        List<TempdayDTO> tempdayDto = hairshopService.shopTempdayFind(shop_seq);
-        return ResponseEntity.ok().body(tempdayDto);
+        List<TempdayDTO> tempdayDtoList = hairshopService.shopTempdayFind(shop_seq);
+        return ResponseEntity.ok().body(tempdayDtoList);
     }
 
    // 직원 임시휴무일 조회
     @GetMapping("closed-day/staff/{shop_seq}")
     public ResponseEntity<?> staffTempdayFind(@PathVariable("shop_seq") int shop_seq) {
-        List<TempdayDTO> tempdayDto = hairshopService.staffTempdayFind(shop_seq);
-        return ResponseEntity.ok().body(tempdayDto);
+        List<TempdayDTO> tempdayDtoList = hairshopService.staffTempdayFind(shop_seq);
+        return ResponseEntity.ok().body(tempdayDtoList);
     }
 
     // 직원 휴무일 등록

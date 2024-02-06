@@ -28,5 +28,7 @@ public class ReviewDTO {
     private String cust_name;
     private String staff_nickname;
     private String style_name;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+    private Date reserv_date;
 
 }
