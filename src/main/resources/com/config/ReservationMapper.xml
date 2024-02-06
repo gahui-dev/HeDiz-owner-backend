@@ -19,7 +19,7 @@
         ON c.shop_seq = f.shop_seq
         LEFT JOIN T_PAYMENT AS g
         ON g.reserv_seq = a.reserv_seq
-        where f.shop_seq = #{shop_seq} AND reserv_stat not in (4)
+        where f.shop_seq = #{shop_seq}
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
     </select>
 
@@ -83,6 +83,7 @@
         INNER JOIN T_HAIRSHOP AS f ON c.shop_seq = f.shop_seq
         WHERE f.shop_seq = #{shop_seq}
         AND DATE(a.reserv_date) = CURDATE()
+        AND reserv_stat not in (4)
         ORDER BY a.reserv_date ASC, a.reserv_time ASC, a.reserv_stat, d.staff_seq;
     </select>
 
