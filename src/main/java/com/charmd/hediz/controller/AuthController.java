@@ -90,7 +90,7 @@ public class AuthController {
     }
 
     // 비밀번호 변경
-    @PostMapping("/change-password")
+    @PutMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody HashMap<String, String> shopPwMap) {
         String newPw = new BCryptPasswordEncoder().encode(shopPwMap.get("shop_pw"));
         shopPwMap.put("shop_pw", newPw);
