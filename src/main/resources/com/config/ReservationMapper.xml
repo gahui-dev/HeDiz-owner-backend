@@ -17,7 +17,7 @@
         ON a.staff_seq = d.staff_seq
         INNER JOIN T_HAIRSHOP AS f
         ON c.shop_seq = f.shop_seq
-        INNER JOIN T_PAYMENT AS g
+        LEFT JOIN T_PAYMENT AS g
         ON g.reserv_seq = a.reserv_seq
         where f.shop_seq = #{shop_seq}
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
