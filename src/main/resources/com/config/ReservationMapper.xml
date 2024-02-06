@@ -19,7 +19,7 @@
         ON c.shop_seq = f.shop_seq
         LEFT JOIN T_PAYMENT AS g
         ON g.reserv_seq = a.reserv_seq
-        where f.shop_seq = #{shop_seq}
+        where f.shop_seq = #{shop_seq} and reserv_stat not in (4)
         ORDER BY a.reserv_date DESC, a.reserv_time DESC;
     </select>
 
