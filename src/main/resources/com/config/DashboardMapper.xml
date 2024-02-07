@@ -60,7 +60,7 @@
         AND A.shop_seq = #{shop_seq}
         INNER JOIN T_RESERVATION AS C
         ON B.style_seq = C.style_seq)
-        SELECT A.DUMMY_DATE AS PAY_MONTH
+        SELECT A.DUMMY_DATE AS date
         ,IFNULL(B.SALES_AMOUNT, 0) AS sales_amount
         FROM DEF_MONTH AS A
         LEFT OUTER JOIN(SELECT A.shop_seq
