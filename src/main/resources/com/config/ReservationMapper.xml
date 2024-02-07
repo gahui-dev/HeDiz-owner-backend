@@ -20,7 +20,7 @@
         LEFT JOIN T_PAYMENT AS g
         ON g.reserv_seq = a.reserv_seq
         where f.shop_seq = #{shop_seq}
-        ORDER BY a.reserv_date ASC, a.reserv_time ASC;
+        ORDER BY a.reserv_date DESC, a.reserv_time ASC;
     </select>
 
     <!--reserv_stat 조회-->
