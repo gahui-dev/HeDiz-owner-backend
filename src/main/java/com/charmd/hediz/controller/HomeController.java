@@ -41,8 +41,16 @@ public class HomeController {
 //    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
 //        List<DashboardDTO> dashboardList;
 //        dashboardList = dashboardService.salesLastSixMonths(shop_seq);
-//        return dashboardList;
+//        return ResponseEntity.ok().body(dashboardList);
 //    }
+
+    /* 고객 방문 현황 */
+    @GetMapping("dashboard/week/{shop_seq}")
+    public ResponseEntity<?> customerVisitStatus(@PathVariable("shop_seq") int shop_seq){
+        List<DashboardDTO> dashboardList;
+        dashboardList = dashboardService.customerVisitStatus(shop_seq);
+        return ResponseEntity.ok().body(dashboardList);
+    }
 
     // 현재 예약 상태 조회
     @GetMapping("realtime-reservation/{shop_seq}")

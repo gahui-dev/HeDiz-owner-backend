@@ -19,4 +19,9 @@ public class DashboardDAO {
         return session.selectList("com.config.DashboardMapper.salesLastSixMonths", shop_seq);
     }
 
+    public List<DashboardDTO> customerVisitStatus(int shop_seq){
+        return session.selectList("com.config.DashboardMapper.customerVisitStatus", shop_seq);
+    }
+
+
 }

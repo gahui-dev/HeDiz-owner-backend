@@ -20,4 +20,9 @@ public class DashboardServiceImpl implements DashboardService {
     public List<DashboardDTO> salesLastSixMonths(int shop_seq) {
         return dao.salesLastSixMonths(shop_seq);
     }
+
+    @Override
+    public List<DashboardDTO> customerVisitStatus(int shop_seq) {
+        return dao.customerVisitStatus(shop_seq);
+    }
 }
