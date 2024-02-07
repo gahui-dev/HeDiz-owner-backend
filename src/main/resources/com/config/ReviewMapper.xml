@@ -15,8 +15,9 @@
         tr.review_date,
         tr.review_reply,
         s.staff_nickname,
-        st.style_name  ,
-        re.reserv_seq
+        st.style_name,
+        re.reserv_seq,
+        re.reserv_date
         from T_REVIEW tr
 
         LEFT JOIN T_RESERVATION re ON tr.reserv_seq = re.reserv_seq
@@ -24,7 +25,8 @@
         LEFT JOIN T_HAIRSHOP ha ON st.shop_seq = ha.shop_seq
         LEFT JOIN T_CUSTOMER cu ON re.cust_seq = cu.cust_seq
         LEFT JOIN T_STAFF s ON re.staff_seq = s.staff_seq
-        ORDER BY tr.review_date desc;
+        WHERE ha.shop_seq = #{shop_seq}
+        ORDER BY tr.review_date ASC;
     </select>
 
     <!--특정 리뷰 조회-->

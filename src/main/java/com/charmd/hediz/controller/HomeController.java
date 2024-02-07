@@ -1,6 +1,8 @@
 package com.charmd.hediz.controller;
 
+import com.charmd.hediz.dto.DashboardDTO;
 import com.charmd.hediz.dto.ReservationDTO;
+import com.charmd.hediz.service.DashboardService;
 import com.charmd.hediz.service.HomeService;
 import com.charmd.hediz.service.ReservationService;
 import io.swagger.annotations.Api;
@@ -23,17 +25,31 @@ public class HomeController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("dashboard")
-    public String dashboard(){
+    @Autowired
+    private DashboardService dashboardService;
 
-        //return "가희 테스트";
+    /* 금일 예약상태별 카운트 개수 */
+    @GetMapping("dashboard/today/{shop_seq}")
+    public ResponseEntity<?> countByReservationStatusPerDay(@PathVariable("shop_seq") int shop_seq){
+        List<DashboardDTO> dashboardList;
+        dashboardList = dashboardService.countByReservationStatusPerDay(shop_seq);
+        return ResponseEntity.ok().body(dashboardList);
+    }
 
+    /* 최근 6개월 매출 */
+    @GetMapping("dashboard/summary/{shop_seq}")
+    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
+        List<DashboardDTO> dashboardList;
+        dashboardList = dashboardService.salesLastSixMonths(shop_seq);
+        return ResponseEntity.ok().body(dashboardList);
+    }
 
-        //return "대시보드 페이지11";
-
-        System.out.println("톰캣테스트");
-        return "대시보드 페이123123지11";
-
+    /* 고객 방문 현황 */
+    @GetMapping("dashboard/week/{shop_seq}")
+    public ResponseEntity<?> customerVisitStatus(@PathVariable("shop_seq") int shop_seq){
+        List<DashboardDTO> dashboardList;
+        dashboardList = dashboardService.customerVisitStatus(shop_seq);
+        return ResponseEntity.ok().body(dashboardList);
     }
 
     // 현재 예약 상태 조회

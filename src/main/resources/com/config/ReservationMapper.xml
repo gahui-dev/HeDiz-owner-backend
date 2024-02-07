@@ -17,10 +17,10 @@
         ON a.staff_seq = d.staff_seq
         INNER JOIN T_HAIRSHOP AS f
         ON c.shop_seq = f.shop_seq
-        INNER JOIN T_PAYMENT AS g
+        LEFT JOIN T_PAYMENT AS g
         ON g.reserv_seq = a.reserv_seq
         where f.shop_seq = #{shop_seq}
-        ORDER BY a.reserv_date DESC, a.reserv_time DESC;
+        ORDER BY a.reserv_date DESC, a.reserv_time ASC;
     </select>
 
     <!--reserv_stat 조회-->
@@ -45,7 +45,7 @@
 
     <!--pay_stat 취소로 변경-->
     <update id="changePayStat" parameterType="int">
-        update T_PAYMENT set pay_stat=1 where reserv_seq=#{reserv_seq}
+        update T_PAYMENT set pay_stat=1, pay_price = pay_price * 0.1  where reserv_seq=#{reserv_seq}
     </update>
 
     <!--특정 예약 데이터 조회-->
@@ -83,6 +83,7 @@
         INNER JOIN T_HAIRSHOP AS f ON c.shop_seq = f.shop_seq
         WHERE f.shop_seq = #{shop_seq}
         AND DATE(a.reserv_date) = CURDATE()
+        AND reserv_stat not in (4)
         ORDER BY a.reserv_date ASC, a.reserv_time ASC, a.reserv_stat, d.staff_seq;
     </select>
 
