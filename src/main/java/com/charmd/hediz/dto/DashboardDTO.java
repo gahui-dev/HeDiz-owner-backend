@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 public class DashboardDTO {
     private int reserv_stat;
     private int count;
+    private int count_stat_1;
+    private int count_stat_2;
+    private int count_stat_3;
     private int sales_amount;
     private String date;
 }

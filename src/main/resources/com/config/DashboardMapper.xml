@@ -80,32 +80,31 @@
     <!--고객 방문 현황-->
     <select id="customerVisitStatus" parameterType="int" resultType="DashboardDTO">
         WITH RECURSIVE DUMMY_LEVEL
-        AS(SELECT 0 AS LEVEL
+        AS (
+        SELECT 0 AS LEVEL
         UNION ALL
         SELECT 1 + DUMMY_LEVEL.LEVEL
         FROM DUMMY_LEVEL
-        WHERE DUMMY_LEVEL.LEVEL <![CDATA[ < (SELECT DATEDIFF(NOW(), NOW() - interval 6 day))) ]]>
-        ,DEF_DATE
-        AS(SELECT DISTINCT #{shop_seq} AS shop_seq
-        ,DATE_FORMAT(ADDDATE(NOW(), INTERVAL (LEVEL * -1) DAY), '%Y%m%d') AS DUMMY_DATE
-        FROM DUMMY_LEVEL)
-        ,DEF_DATA
-        AS(SELECT A.shop_seq
-        ,C.*
+        WHERE DUMMY_LEVEL.LEVEL <![CDATA[ < (SELECT DATEDIFF(NOW(), NOW() - interval 6 day)) ]]>
+        ),
+        DEF_DATE AS (
+        SELECT DISTINCT 1 AS shop_seq, DATE_FORMAT(ADDDATE(NOW(), INTERVAL (LEVEL * -1) DAY), '%Y%m%d') AS DUMMY_DATE
+        FROM DUMMY_LEVEL
+        ),
+        DEF_DATA AS (
+        SELECT A.shop_seq, C.*
         FROM T_HAIRSHOP AS A
-        INNER JOIN T_HAIRSTYLE AS B
-        ON A.shop_seq = B.shop_seq
-        AND A.shop_seq = #{shop_seq}
-        INNER JOIN T_RESERVATION AS C
-        ON B.style_seq = C.style_seq
-        WHERE C.RESERV_STAT = 1
-        AND C.RESERV_DATE BETWEEN DATE_ADD(CURDATE(), interval - 7 day) AND CURDATE())
-
-        SELECT A.DUMMY_DATE AS date
-        ,IFNULL(COUNT(B.RESERV_SEQ), 0) AS count
+        INNER JOIN T_HAIRSTYLE AS B ON A.shop_seq = B.shop_seq AND A.shop_seq = #{shop_seq}
+        INNER JOIN T_RESERVATION AS C ON B.style_seq = C.style_seq
+        WHERE C.RESERV_STAT IN (1, 2, 3)
+        AND C.RESERV_DATE BETWEEN DATE_ADD(CURDATE(), INTERVAL -7 DAY) AND CURDATE()
+        )
+        SELECT A.DUMMY_DATE AS date,
+        SUM(CASE WHEN B.RESERV_STAT = 1 THEN 1 ELSE 0 END) AS count_stat_1,
+        SUM(CASE WHEN B.RESERV_STAT = 2 THEN 1 ELSE 0 END) AS count_stat_2,
+        SUM(CASE WHEN B.RESERV_STAT = 3 THEN 1 ELSE 0 END) AS count_stat_3
         FROM DEF_DATE AS A
-        LEFT OUTER JOIN DEF_DATA B
-        ON A.DUMMY_DATE = B.RESERV_DATE
+        LEFT OUTER JOIN DEF_DATA B ON A.DUMMY_DATE = B.RESERV_DATE
         GROUP BY A.DUMMY_DATE
         ORDER BY A.DUMMY_DATE
     </select>
