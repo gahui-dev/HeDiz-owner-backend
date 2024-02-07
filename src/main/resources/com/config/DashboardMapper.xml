@@ -73,7 +73,7 @@
         GROUP BY A.shop_seq, DATE_FORMAT(B.PAY_DATE, '%Y%m')) AS B
         ON A.shop_seq = B.shop_seq
         AND A.DUMMY_DATE = B.PAY_MONTH
-        ORDER BY PAY_MONTH desc
+        ORDER BY PAY_MONTH
         LIMIT 6
     </select>
 
