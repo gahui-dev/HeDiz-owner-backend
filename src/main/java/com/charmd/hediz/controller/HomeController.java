@@ -37,10 +37,12 @@ public class HomeController {
     }
 
     /* 최근 6개월 매출 */
-    @GetMapping("dashboard/summary/{shop_seq}")
-    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
-        return null;
-    }
+//    @GetMapping("dashboard/summary/{shop_seq}")
+//    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
+//        List<DashboardDTO> dashboardList;
+//        dashboardList = dashboardService.salesLastSixMonths(shop_seq);
+//        return dashboardList;
+//    }
 
     // 현재 예약 상태 조회
     @GetMapping("realtime-reservation/{shop_seq}")

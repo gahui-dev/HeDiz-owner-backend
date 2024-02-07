@@ -15,4 +15,9 @@ public class DashboardServiceImpl implements DashboardService {
     public List<DashboardDTO> countByReservationStatusPerDay(int shop_seq) {
         return dao.countByReservationStatusPerDay(shop_seq);
     }
+
+    @Override
+    public List<DashboardDTO> salesLastSixMonths(int shop_seq) {
+        return dao.salesLastSixMonths(shop_seq);
+    }
 }

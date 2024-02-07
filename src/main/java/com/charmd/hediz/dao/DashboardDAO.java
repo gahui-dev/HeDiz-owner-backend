@@ -15,4 +15,8 @@ public class DashboardDAO {
     public List<DashboardDTO> countByReservationStatusPerDay(int shop_seq){
         return session.selectList("com.config.DashboardMapper.countByReservationStatusPerDay", shop_seq);
     }
+    public List<DashboardDTO> salesLastSixMonths(int shop_seq){
+        return session.selectList("com.config.DashboardMapper.salesLastSixMonths", shop_seq);
+    }
+
 }

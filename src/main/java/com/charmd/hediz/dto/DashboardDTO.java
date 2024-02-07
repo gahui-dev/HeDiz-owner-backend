@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Alias("DashboardDTO")
 public class DashboardDTO {
     private int reserv_stat;
-    private int amount;
+    private int count;
+    private int sales_amount;
     private LocalDate date;
 }
