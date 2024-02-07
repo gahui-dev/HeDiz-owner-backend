@@ -40,42 +40,42 @@
     </select>
 
     <!--최근 6개월 매출-->
-<!--    <select id="salesLastSixMonths" resultType="DashboardDTO" parameterType="int">-->
-<!--        WITH RECURSIVE DUMMY_LEVEL-->
-<!--        AS(SELECT 0 AS LEVEL-->
-<!--        UNION ALL-->
-<!--        SELECT 1 + DUMMY_LEVEL.LEVEL-->
-<!--        FROM DUMMY_LEVEL-->
-<!--        WHERE DUMMY_LEVEL.LEVEL < (SELECT DATEDIFF(NOW(), NOW() - interval 6 month)))-->
-<!--        ,DEF_MONTH-->
-<!--        AS(SELECT DISTINCT 1 AS shop_seq &#45;&#45; #{shop_seq}-->
-<!--        ,DATE_FORMAT(ADDDATE(NOW(), INTERVAL (LEVEL * -1) DAY), '%Y%m') AS DUMMY_DATE-->
-<!--        FROM DUMMY_LEVEL)-->
-<!--        ,DEF_DATA-->
-<!--        AS(SELECT A.shop_seq-->
-<!--        ,C.*-->
-<!--        FROM T_HAIRSHOP AS A-->
-<!--        INNER JOIN T_HAIRSTYLE AS B-->
-<!--        ON A.shop_seq = B.shop_seq-->
-<!--        AND A.shop_seq = #{shop_seq}-->
-<!--        INNER JOIN T_RESERVATION AS C-->
-<!--        ON B.style_seq = C.style_seq)-->
-<!--        SELECT A.DUMMY_DATE AS PAY_MONTH-->
-<!--        ,IFNULL(B.SALES_AMOUNT, 0) AS SALES_AMOUNT-->
-<!--        FROM DEF_MONTH AS A-->
-<!--        LEFT OUTER JOIN(SELECT A.shop_seq-->
-<!--        ,DATE_FORMAT(B.PAY_DATE, '%Y%m') as PAY_MONTH-->
-<!--        ,SUM(pay_price) AS SALES_AMOUNT-->
-<!--        FROM DEF_DATA AS A-->
-<!--        INNER JOIN T_PAYMENT AS B-->
-<!--        ON A.reserv_seq = B.reserv_seq-->
-<!--        WHERE B.pay_date >= (SELECT LAST_DAY(NOW() - interval 6 month) + interval 1 day FROM DUAL) AND B.pay_date <= NOW()-->
-<!--        GROUP BY A.shop_seq, MONTH(B.pay_date)) AS B-->
-<!--        ON A.shop_seq = B.shop_seq-->
-<!--        AND A.DUMMY_DATE = B.PAY_MONTH-->
-<!--        ORDER BY PAY_MONTH-->
-<!--        LIMIT 6-->
-<!--    </select>-->
+    <select id="salesLastSixMonths" resultType="DashboardDTO" parameterType="int">
+        WITH RECURSIVE DUMMY_LEVEL
+        AS(SELECT 0 AS LEVEL
+        UNION ALL
+        SELECT 1 + DUMMY_LEVEL.LEVEL
+        FROM DUMMY_LEVEL
+        WHERE DUMMY_LEVEL.LEVEL <![CDATA[ < (SELECT DATEDIFF(NOW(), NOW() - interval 6 month))) ]]>
+        ,DEF_MONTH
+        AS(SELECT DISTINCT #{shop_seq} AS shop_seq
+        ,DATE_FORMAT(ADDDATE(NOW(), INTERVAL (LEVEL * -1) DAY), '%Y%m') AS DUMMY_DATE
+        FROM DUMMY_LEVEL)
+        ,DEF_DATA
+        AS(SELECT A.shop_seq
+        ,C.*
+        FROM T_HAIRSHOP AS A
+        INNER JOIN T_HAIRSTYLE AS B
+        ON A.shop_seq = B.shop_seq
+        AND A.shop_seq = #{shop_seq}
+        INNER JOIN T_RESERVATION AS C
+        ON B.style_seq = C.style_seq)
+        SELECT A.DUMMY_DATE AS PAY_MONTH
+        ,IFNULL(B.SALES_AMOUNT, 0) AS sales_amount
+        FROM DEF_MONTH AS A
+        LEFT OUTER JOIN(SELECT A.shop_seq
+        ,DATE_FORMAT(B.PAY_DATE, '%Y%m') as PAY_MONTH
+        ,SUM(pay_price) AS SALES_AMOUNT
+        FROM DEF_DATA AS A
+        INNER JOIN T_PAYMENT AS B
+        ON A.reserv_seq = B.reserv_seq
+        WHERE B.pay_date >= (SELECT LAST_DAY(NOW() - interval 6 month) + interval 1 day FROM DUAL) AND B.pay_date <![CDATA[ <= NOW() ]]>
+        GROUP BY A.shop_seq, MONTH(B.pay_date)) AS B
+        ON A.shop_seq = B.shop_seq
+        AND A.DUMMY_DATE = B.PAY_MONTH
+        ORDER BY PAY_MONTH
+        LIMIT 6
+    </select>
 
     <!--고객 방문 현황-->
     <select id="customerVisitStatus" parameterType="int" resultType="DashboardDTO">

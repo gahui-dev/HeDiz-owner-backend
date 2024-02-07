@@ -37,12 +37,12 @@ public class HomeController {
     }
 
     /* 최근 6개월 매출 */
-//    @GetMapping("dashboard/summary/{shop_seq}")
-//    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
-//        List<DashboardDTO> dashboardList;
-//        dashboardList = dashboardService.salesLastSixMonths(shop_seq);
-//        return ResponseEntity.ok().body(dashboardList);
-//    }
+    @GetMapping("dashboard/summary/{shop_seq}")
+    public ResponseEntity<?> salesLastSixMonths(@PathVariable("shop_seq") int shop_seq){
+        List<DashboardDTO> dashboardList;
+        dashboardList = dashboardService.salesLastSixMonths(shop_seq);
+        return ResponseEntity.ok().body(dashboardList);
+    }
 
     /* 고객 방문 현황 */
     @GetMapping("dashboard/week/{shop_seq}")
