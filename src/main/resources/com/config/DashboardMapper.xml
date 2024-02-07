@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.config.DashboardMapper">
+    <select id="countByReservationStatusPerDay" parameterType="int" resultType="DashboardDTO">
+        WITH DEF_DATA
+        AS(SELECT A.shop_seq
+        ,C.*
+        FROM T_HAIRSHOP AS A
+        INNER JOIN T_HAIRSTYLE AS B
+        ON A.shop_seq = B.shop_seq
+        AND A.shop_seq = #{shop_seq}
+        INNER JOIN T_RESERVATION AS C
+        ON B.style_seq = C.style_seq)
+        ,DEF_RESERV_STAT
+        AS(SELECT 0 AS RESERV_STAT FROM DUAL
+        UNION ALL
+        SELECT 1 AS RESERV_STAT FROM DUAL
+        UNION ALL
+        SELECT 2 AS RESERV_STAT FROM DUAL
+        UNION ALL
+        SELECT 3 AS RESERV_STAT FROM DUAL
+        UNION ALL
+        SELECT 4 AS RESERV_STAT FROM DUAL)
+
+        SELECT DISTINCT A.RESERV_STAT
+        ,IFNULL(B.CNT, 0) AS CNT
+        FROM DEF_RESERV_STAT AS A
+        LEFT OUTER JOIN(SELECT RESERV_STAT
+        ,COUNT(RESERV_STAT) AS CNT
+        FROM DEF_DATA
+        WHERE RESERV_DATE = CURDATE()
+        GROUP BY RESERV_STAT) AS B
+        ON A.RESERV_STAT = B.RESERV_STAT
+        ORDER BY RESERV_STAT
+    </select>
+</mapper>
